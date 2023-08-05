@@ -48,7 +48,7 @@ function App() {
       <div className='h-screen bg-red-50' onClick={handleClick}>
         <svg height='100%' width='100%'>
           {clicks && clicks.map((c, i) =>
-            <circle cx={c.x} cy={c.y} r='40' stroke='black' strokeWidth='3' fill='red' key={i + clicks.length} />
+            <circle cx={c.x} cy={c.y - 30} r='30' stroke='black' strokeWidth='1' fill='lightblue' key={i + clicks.length} />
           )}
         </svg>
       </div>
