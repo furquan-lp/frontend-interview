@@ -17,8 +17,11 @@ function App() {
 
   return (
     <main>
-      <header>
-        <button className='p-1 bg-gray-100 active:bg-gray-400 hover:bg-gray-200' onClick={handleReset}>Reset</button>
+      <header className='flex items-center justify-between'>
+        <button className='m-1 mx-2 p-1 bg-gray-100 active:bg-gray-400 hover:bg-gray-200' onClick={handleReset}>
+          Reset
+        </button>
+        <button className='m-1 mx-2 p-1 bg-gray-100 active:bg-gray-400 hover:bg-gray-200'>Undo</button>
       </header>
       <div className='h-screen bg-red-50' onClick={handleClick}>
         <svg height='100%' width='100%'>
