@@ -20,6 +20,7 @@ function App() {
 
   const handleReset = () => {
     setClicks(null);
+    setUndoBuffer(null);
   };
 
   return (
