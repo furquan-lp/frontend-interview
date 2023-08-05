@@ -18,6 +18,14 @@ function App() {
     }
   };
 
+  const handleRedo = (e: React.MouseEvent<HTMLButtonElement>) => {
+    if (undoBuffer !== null) {
+      setClicks(clicks === null ?
+        [undoBuffer[undoBuffer.length - 1]] : [...clicks, undoBuffer[undoBuffer.length - 1]]);
+      setUndoBuffer(undoBuffer.length === 1 ? null : undoBuffer.slice(0, undoBuffer.length - 1));
+    }
+  };
+
   const handleReset = () => {
     setClicks(null);
     setUndoBuffer(null);
@@ -33,7 +41,7 @@ function App() {
           <button className='m-1 p-1 bg-gray-100 active:bg-gray-400 hover:bg-gray-200' onClick={handleUndo}>
             Undo
           </button>
-          <button className='m-1 p-1 bg-gray-100 active:bg-gray-400 hover:bg-gray-200'>
+          <button className='m-1 p-1 bg-gray-100 active:bg-gray-400 hover:bg-gray-200' onClick={handleRedo}>
             Redo
           </button>
         </span>
