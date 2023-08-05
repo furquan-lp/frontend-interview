@@ -11,14 +11,14 @@ function App() {
       [{ x: e.clientX, y: e.clientY }] : [...clicks, { x: e.clientX, y: e.clientY }]);
   };
 
-  const handleUndo = (e: React.MouseEvent<HTMLElement>) => {
+  const handleUndo = () => {
     if (clicks !== null) {
       setUndoBuffer(undoBuffer === null ? [clicks[clicks.length - 1]] : [...undoBuffer, clicks[clicks.length - 1]]);
       setClicks(clicks.length === 1 ? null : clicks.slice(0, clicks.length - 1));
     }
   };
 
-  const handleRedo = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const handleRedo = () => {
     if (undoBuffer !== null) {
       setClicks(clicks === null ?
         [undoBuffer[undoBuffer.length - 1]] : [...clicks, undoBuffer[undoBuffer.length - 1]]);
