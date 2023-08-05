@@ -4,7 +4,6 @@ import { useState } from 'react';
 function App() {
   const [clicks, setClicks] = useState<{ x: number, y: number }[] | null>(null);
   const [undoBuffer, setUndoBuffer] = useState<{ x: number, y: number }[] | null>(null);
-  console.log(undoBuffer);
 
   const handleClick = (e: React.MouseEvent<HTMLElement>) => {
     setClicks(clicks === null ?
