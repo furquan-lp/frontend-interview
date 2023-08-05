@@ -14,7 +14,7 @@ function App() {
   const handleUndo = (e: React.MouseEvent<HTMLElement>) => {
     if (clicks !== null) {
       setUndoBuffer(undoBuffer === null ? [clicks[clicks.length - 1]] : [...undoBuffer, clicks[clicks.length - 1]]);
-      setClicks(clicks.slice(0, clicks.length - 1));
+      setClicks(clicks.length === 1 ? null : clicks.slice(0, clicks.length - 1));
     }
   };
 
