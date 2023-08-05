@@ -28,9 +28,14 @@ function App() {
         <button className='m-1 mx-2 p-1 bg-gray-100 active:bg-gray-400 hover:bg-gray-200' onClick={handleReset}>
           Reset
         </button>
-        <button className='m-1 mx-2 p-1 bg-gray-100 active:bg-gray-400 hover:bg-gray-200' onClick={handleUndo}>
-          Undo
-        </button>
+        <span>
+          <button className='m-1 p-1 bg-gray-100 active:bg-gray-400 hover:bg-gray-200' onClick={handleUndo}>
+            Undo
+          </button>
+          <button className='m-1 p-1 bg-gray-100 active:bg-gray-400 hover:bg-gray-200'>
+            Redo
+          </button>
+        </span>
       </header>
       <div className='h-screen bg-red-50' onClick={handleClick}>
         <svg height='100%' width='100%'>
