@@ -31,7 +31,7 @@ function App() {
   };
 
   return (
-    <main>
+    <main className='bg-blue-400'>
       <header className='flex items-center justify-between'>
         <button className='m-1 mx-2 p-2 rounded-md bg-gray-100 active:bg-gray-400 hover:bg-gray-200'
           onClick={handleReset}>
@@ -48,10 +48,10 @@ function App() {
           </button>
         </span>
       </header>
-      <div className='h-screen bg-red-50' onClick={handleClick}>
+      <div className='h-screen bg-blue-50' onClick={handleClick}>
         <svg height='100%' width='100%'>
           {clicks && clicks.map((c, i) =>
-            <circle cx={c.x} cy={c.y - 30} r='30' stroke='black' strokeWidth='1' fill='lightblue' key={i + clicks.length} />
+            <circle cx={c.x} cy={c.y - 30} r='30' stroke='gray' strokeWidth='1' fill='lightblue' key={i + clicks.length} />
           )}
         </svg>
       </div>
