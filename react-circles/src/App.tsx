@@ -33,16 +33,17 @@ function App() {
   return (
     <main className='bg-blue-400'>
       <header className='flex items-center justify-between'>
-        <button className='m-1 mx-2 p-2 rounded-md bg-gray-100 active:bg-gray-400 hover:bg-gray-200'
+        <button className='m-1 mx-2 p-1.5 rounded-md bg-gray-100 active:bg-gray-400 hover:bg-gray-200'
           onClick={handleReset}>
           Reset
         </button>
+        <span className='text-white text-2xl font-bold'>React Circles</span>
         <span>
-          <button className='m-1 p-2 rounded-md bg-gray-100 active:bg-gray-400 hover:bg-gray-200'
+          <button className='m-1 p-1.5 rounded-md bg-gray-100 active:bg-gray-400 hover:bg-gray-200'
             onClick={handleUndo}>
             Undo
           </button>
-          <button className='m-1 p-2 rounded-md bg-gray-100 active:bg-gray-400 hover:bg-gray-200'
+          <button className='m-1 p-1.5 rounded-md bg-gray-100 active:bg-gray-400 hover:bg-gray-200'
             onClick={handleRedo}>
             Redo
           </button>
