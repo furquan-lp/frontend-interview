@@ -2,8 +2,11 @@
 export default {
   content: ["./src/**/*.{html,tsx}"],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        'titlefont': ['Pacifico', 'cursive']
+      },
+    },
   },
   plugins: [],
 }
-
