@@ -3,7 +3,8 @@ import { useState } from 'react';
 
 function Instructions() {
   return (
-    <div className='md:w-1/3 p-2 md:p-6 md:py-10 mx-auto text-xl md:text-2xl text-emerald-500'>
+    <div className='md:w-1/3 p-2 md:p-6 md:py-10 mx-auto text-xl md:text-2xl text-emerald-500 bg-amber-50/50 m-2
+     shadow-sm rounded-lg'>
       Instructions:
       <ul className='list-disc text-base md:text-lg px-6 mt-4'>
         <li className='my-2'>Click anywhere on the screen to place a circle</li>
