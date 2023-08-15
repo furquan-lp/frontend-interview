@@ -3,7 +3,7 @@ import { useState } from 'react';
 
 function Instructions() {
   return (
-    <div className='md:w-1/3 p-2 md:p-6 md:py-10 mx-auto text-xl md:text-2xl text-blue-500 bg-amber-50/50 m-2
+    <div className='md:w-1/3 p-2 md:p-6 md:py-10 md:mx-auto text-xl md:text-2xl text-blue-500 bg-amber-50/50 m-2
      shadow-sm rounded-lg'>
       Instructions:
       <ul className='list-disc text-base md:text-lg px-6 mt-4'>
