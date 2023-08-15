@@ -1,27 +1,20 @@
-# React + TypeScript + Vite
+# react-circles
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a frontend React interview assignment (junior level). Written in TypeScript and React, built with [Vite](https://vitejs.dev/).
 
-Currently, two official plugins are available:
+Problem statement:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+* Make a basic single page app where the user can click anywhere on the page to place a circle on that location
+* Add two buttons—undo and redo—to undo and redo these placements
+* Add a reset button to clear the entire page of these circles
 
-## Expanding the ESLint configuration
+My solution:
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+* Use two state variables—`clicks` and `undoBuffer`—to store clicks (x and y positions) and to store the clicks that 
+have been undone
+* When the undo button is pressed, remove the last click from the `clicks` state and store it in the undo buffer
+* When the redo button is pressed, add the last click from the undo buffer to `clicks` and remove it from `undoBuffer`
+* When the reset button is pressed, set both `clicks` and `undoBuffer` to `null`
+* Paint the circles on the entire viewport by drawing SVGs based on the x and y values from `clicks`
 
-- Configure the top-level `parserOptions` property like this:
-
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
-```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+Note: You can send me web development questions or problems to add to this repository by emailing me at syed@nextdev.in
