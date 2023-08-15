@@ -37,7 +37,8 @@ function App() {
           onClick={handleReset}>
           Reset
         </button>
-        <span className='text-white text-2xl font-bold'>React Circles</span>
+        <a className='text-white text-2xl font-bold hover:underline'
+          href='https://github.com/furquan-lp/frontend-interview/tree/master/react-circles'>React Circles</a>
         <span>
           <button className='m-1 p-1.5 rounded-md bg-gray-100 active:bg-gray-400 hover:bg-gray-200'
             onClick={handleUndo}>
