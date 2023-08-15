@@ -1,6 +1,24 @@
 import React from 'react';
 import { useState } from 'react';
 
+function Instructions() {
+  return (
+    <div className='md:w-1/3 p-2 md:p-6 md:py-10 mx-auto text-xl md:text-2xl text-emerald-500'>
+      Instructions:
+      <ul className='list-disc text-base md:text-lg px-6 mt-4'>
+        <li className='my-2'>Click anywhere on the screen to place a circle</li>
+        <li className='my-2'>Press undo to remove the last circle placed</li>
+        <li className='my-2'>Press redo to place back the last circle undone, regardless of how many circles have been
+          placed</li>
+        <li className='my-2'>Press reset to clear the entire screen</li>
+        <li className='my-2'>The title text is a link to the source code repository</li>
+      </ul>
+      <p className='text-base md:text-lg my-4'>Note: These instructions will disappear when any circle is placed on the
+        screen. Press the reset button to bring back these instructions.</p>
+    </div>
+  );
+}
+
 function App() {
   const [clicks, setClicks] = useState<{ x: number, y: number }[] | null>(null);
   const [undoBuffer, setUndoBuffer] = useState<{ x: number, y: number }[] | null>(null);
@@ -51,6 +69,7 @@ function App() {
         </span>
       </header>
       <div className='h-screen animated-gradient-bg' onClick={handleClick}>
+        {(clicks === null && undoBuffer === null) && <Instructions />}
         <svg height='100%' width='100%'>
           {clicks && clicks.map((c, i) =>
             <circle cx={c.x} cy={c.y - 30} r='30' stroke='gray' strokeWidth='1' fill='lightblue'
