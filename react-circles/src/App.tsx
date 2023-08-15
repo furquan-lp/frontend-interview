@@ -49,8 +49,8 @@ function App() {
   };
 
   return (
-    <main className='bg-blue-400'>
-      <header className='flex items-center justify-between'>
+    <main className='animated-gradient-bg'>
+      <header className='flex items-center justify-between bg-blue-400/75'>
         <button className='m-1 mx-2 p-1.5 rounded-md bg-gray-100 active:bg-gray-400 hover:bg-gray-200'
           onClick={handleReset}>
           Reset
@@ -68,7 +68,7 @@ function App() {
           </button>
         </span>
       </header>
-      <div className='h-screen animated-gradient-bg' onClick={handleClick}>
+      <div className='h-screen' onClick={handleClick}>
         {(clicks === null && undoBuffer === null) && <Instructions />}
         <svg height='100%' width='100%'>
           {clicks && clicks.map((c, i) =>
