@@ -3,7 +3,7 @@ import { useState } from 'react';
 
 function Instructions() {
   return (
-    <div className='md:w-1/3 p-2 md:p-6 md:py-10 mx-auto text-xl md:text-2xl text-emerald-500 bg-amber-50/50 m-2
+    <div className='md:w-1/3 p-2 md:p-6 md:py-10 mx-auto text-xl md:text-2xl text-blue-500 bg-amber-50/50 m-2
      shadow-sm rounded-lg'>
       Instructions:
       <ul className='list-disc text-base md:text-lg px-6 mt-4'>
@@ -51,7 +51,7 @@ function App() {
 
   return (
     <main className='animated-gradient-bg'>
-      <header className='flex items-center justify-between bg-blue-400/75'>
+      <header className='flex items-center justify-between bg-slate-400/25'>
         <button className='m-1 mx-2 p-1.5 rounded-md bg-gray-100 active:bg-gray-400 hover:bg-gray-200'
           onClick={handleReset}>
           Reset
