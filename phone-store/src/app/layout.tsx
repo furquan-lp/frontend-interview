@@ -4,7 +4,7 @@ import type { Metadata } from 'next';
 export const metadata: Metadata = {
   title: 'Phone Store App',
   description: 'Store App showcase with product filters and searching',
-}
+};
 
 export default function RootLayout({
   children,
@@ -15,5 +15,5 @@ export default function RootLayout({
     <html lang="en">
       <body className="">{children}</body>
     </html>
-  )
+  );
 }
