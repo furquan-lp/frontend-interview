@@ -1,2 +1,4 @@
 # frontend-interview
-Assorted solutions to interview problems for frontend web development
+
+Cleanly designed slick catalog of solved web development interview problems and assignments.
+Visit LIVE @ https://frontend.nextdev.in/
