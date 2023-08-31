@@ -8,6 +8,9 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        'source-code-pro': ['var(--font-source-code-pro)'],
+      },
     },
   },
   plugins: [],
