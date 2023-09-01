@@ -17,3 +17,20 @@ export function ProductCard({ imageUrl, name, brand, price }: ProductPhone) {
     </article>
   );
 }
+
+export function ProductInfoDialog({ imageUrl, name, brand, price, open }: ProductPhone & { open: boolean }) {
+  return (
+    <dialog open={open} className='flex p-2 border'>
+      <Image src={`/${imageUrl || 'sample-phone.webp'}`} width={320} height={480} alt={`product ${name} photo`}
+        className='m-2 mx-10' />
+      <section className='flex flex-col mx-10 mt-10 justify-around'>
+        <span>
+          <span className='md:text-4xl m-1'>{name}</span>
+          <span className='flex m-1 my-4'>Rating: * * * * *</span>
+          <span className='m-1 my-2 text-xl'>By <span className='text-slate-600'>{brand || 'Unknown'}</span></span>
+        </span>
+        <span className='m-1 my-2 text-2xl'>&#8377;{price}</span>
+      </section>
+    </dialog>
+  );
+}
