@@ -26,7 +26,9 @@ export function ProductInfoDialog({ imageUrl, name, brand, price, open }: Produc
       <section className='flex flex-col mx-10 mt-10 justify-around'>
         <span>
           <span className='md:text-4xl m-1'>{name}</span>
-          <span className='flex m-1 my-4'>Rating: * * * * *</span>
+          <span className='flex items-center m-1 my-4 text-xl'>Rating: {[...Array(5)].map((e, i) =>
+            <span data-feather="star" className='ml-1 text-yellow-500 fill-yellow-400' />)}
+          </span>
           <span className='m-1 my-2 text-xl'>By <span className='text-slate-600'>{brand || 'Unknown'}</span></span>
         </span>
         <span className='m-1 my-2 text-2xl'>&#8377;{price}</span>
