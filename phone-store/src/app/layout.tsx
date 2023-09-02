@@ -1,6 +1,7 @@
 import './globals.css';
 import type { Metadata } from 'next';
 import { Source_Code_Pro } from 'next/font/google';
+import Script from 'next/script';
 
 const sourceCodePro = Source_Code_Pro({
   subsets: ['latin'],
@@ -21,6 +22,11 @@ export default function RootLayout({
   return (
     <html lang='en' className={sourceCodePro.variable}>
       <body className=''>{children}</body>
+      <Script src='https://unpkg.com/feather-icons' />
+      <Script strategy='lazyOnload' >
+        console.log('loaded feather');
+        feather.replace();
+      </Script>
     </html>
   );
 }
