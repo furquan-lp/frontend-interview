@@ -32,3 +32,20 @@ def generate_phones(n):
     for i in range(n):
         phones.append(generate_phone_name())
     return list(set(phones))
+
+def generate_prices(n):
+    prices = []
+    # 6k to 10k
+    # 10k to 20k
+    # 20k to 30k
+    # 30k+
+    for i in range(n):
+        if random.random() < 0.1:
+            prices.append(random.randint(30, 90) * 1000 + random.choice([999, 998]))
+        elif random.random() < 0.25:
+            prices.append(random.randint(20, 30) * 1000 + random.choice([999, 998]))
+        elif random.random() < 0.5:
+            prices.append(random.randint(6, 10) * 1000 + random.choice([999, 998]))
+        else:
+            prices.append(random.randint(10, 20) * 1000 + random.choice([999, 998]))
+    return prices
