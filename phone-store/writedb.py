@@ -26,3 +26,9 @@ def generate_phone_name():
         return f'{brand_name} {word} {number}{first_letter} {extra}'
 
     return f'{brand_name} {word} {first_letter}{second_letter}{number} {extra}'
+
+def generate_phones(n):
+    phones = []
+    for i in range(n):
+        phones.append(generate_phone_name())
+    return list(set(phones))
