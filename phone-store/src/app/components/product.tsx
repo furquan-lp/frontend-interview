@@ -31,7 +31,17 @@ export function ProductInfoDialog({ imageUrl, name, brand, price, open }: Produc
           </span>
           <span className='m-1 my-2 text-xl'>By <span className='text-slate-600'>{brand || 'Unknown'}</span></span>
         </span>
-        <span className='m-1 my-2 text-2xl'>&#8377;{price}</span>
+        <span className='flex flex-col gap-y-2'>
+          <span className='m-1 text-3xl'>&#8377;{price}</span>
+          <span className='flex gap-2'>
+            <button className='hover:bg-emerald-300 p-2 px-6 text-xl border-2 border-emerald-500 rounded-md'>
+              Buy
+            </button>
+            <button className='hover:bg-red-300 p-2 px-6 text-xl border-2 border-red-500 rounded-md'>
+              Close
+            </button>
+          </span>
+        </span>
       </section>
     </dialog>
   );
