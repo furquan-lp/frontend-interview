@@ -60,5 +60,11 @@ con = psycopg2.connect(
 
 cur = con.cursor()
 cur.execute('DROP TABLE IF EXISTS phone_models;')
+cur.execute('CREATE TABLE phone_models ('
+    'brand varchar(32),'
+    'model text NOT NULL,'
+    'price int NOT NULL,'
+    'image varchar(50));')
 
+cur.close()
 print('done')
