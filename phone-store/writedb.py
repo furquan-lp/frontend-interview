@@ -11,8 +11,8 @@ images_dir = 'phones/'
 def generate_phone_name():
     brand_name = random.choice(brands)
     word = random.choice(words)    
-    first_letter = random.choice([*list(string.ascii_uppercase), *['']])
-    second_letter = random.choice([*list(string.ascii_uppercase), *['']])
+    first_letter = random.choice(string.ascii_uppercase) if random.random() > 0.1 else ''
+    second_letter = random.choice(string.ascii_uppercase) if random.random() > 0.1 else ''
     number = random.choice(string.digits.replace('0', ''))
     extra = random.choice(superlatives) if random.random() < 0.2 else ''
     
@@ -51,7 +51,7 @@ def generate_prices(n):
             prices.append(random.randint(10, 20) * 1000 + random.choice([999, 998]))
     return prices
 
-phones = generate_phones(10)
+phones = generate_phones(100)
 prices = generate_prices(len(phones))
 
 con = psycopg2.connect(
