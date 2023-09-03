@@ -24,9 +24,9 @@ def generate_phone_name():
         word = 'iPhone'
         first_letter = random.choice(['s', 'c', 'SE', 'XS', 'X']) if random.random() < 0.2 else ''
         extra = random.choice(superlatives) if random.random() < 0.5 else ''
-        return (f'{brand_name} {word} {number}{first_letter} {extra}', brand_name)
+        return (f'{word} {number}{first_letter} {extra}'.strip(), brand_name)
 
-    return (f'{brand_name} {word} {first_letter}{second_letter}{number} {extra}', brand_name)
+    return (f'{word} {first_letter}{second_letter}{number} {extra}'.strip(), brand_name)
 
 def generate_phones(n):
     phones = []
