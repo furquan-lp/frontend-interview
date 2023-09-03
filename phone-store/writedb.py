@@ -6,6 +6,7 @@ import psycopg2
 brands = [ 'Samsung', 'Apple', 'Google', 'OnePlus', 'Asus', 'Nokia', 'Xiaomi', 'Vivo', 'Oppo' ]
 words = [ 'Call', 'Sky', 'Jet', 'Lumen', 'Bold', 'Glass', 'Gold' ]
 superlatives = [ 'Pro', 'Plus', 'Pro+', 'Super', 'Ultra' ]
+images_dir = 'phones/'
 
 def generate_phone_name():
     brand_name = random.choice(brands)
@@ -49,3 +50,15 @@ def generate_prices(n):
         else:
             prices.append(random.randint(10, 20) * 1000 + random.choice([999, 998]))
     return prices
+
+con = psycopg2.connect(
+        host=os.environ['POSTGRE_DB_HOST'],
+        port=25060,
+        database="defaultdb",
+        user=os.environ['POSTGRE_DB_USERNAME'],
+        password=os.environ['POSTGRE_DB_PASSWORD'])
+
+cur = con.cursor()
+cur.execute('DROP TABLE IF EXISTS phone_models;')
+
+print('done')
