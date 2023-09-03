@@ -63,6 +63,17 @@ con = psycopg2.connect(
 
 cur = con.cursor()
 
+print('Previous data:')
+cur.execute("CREATE OR REPLACE FUNCTION select_phone_models() RETURNS TABLE(brand varchar(32), model text, price int, image varchar(50)) AS $$ "
+"BEGIN "
+    "IF EXISTS (SELECT FROM information_schema.tables WHERE table_schema = 'public' AND table_name = 'phone_models') THEN"
+    "    RETURN QUERY SELECT * FROM \"phone_models\";"
+    "END IF;"
+"END; $$ LANGUAGE plpgsql; SELECT select_phone_models();")
+previous_data = cur.fetchall()
+print(previous_data)
+
+print('Dropping table...\n')
 cur.execute('DROP TABLE IF EXISTS phone_models;')
 cur.execute('CREATE TABLE phone_models ('
     'brand varchar(32),'
