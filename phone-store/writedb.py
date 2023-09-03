@@ -11,7 +11,7 @@ images_dir = 'phones/'
 def generate_phone_name():
     brand_name = random.choice(brands)
     word = random.choice(words)    
-    first_letter = random.choice(string.ascii_uppercase)
+    first_letter = random.choice([*list(string.ascii_uppercase), *['']])
     second_letter = random.choice([*list(string.ascii_uppercase), *['']])
     number = random.choice(string.digits.replace('0', ''))
     extra = random.choice(superlatives) if random.random() < 0.2 else ''
