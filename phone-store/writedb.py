@@ -51,6 +51,9 @@ def generate_prices(n):
             prices.append(random.randint(10, 20) * 1000 + random.choice([999, 998]))
     return prices
 
+phones = generate_phones(10)
+prices = generate_prices(len(phones))
+
 con = psycopg2.connect(
         host=os.environ['POSTGRE_DB_HOST'],
         port=25060,
@@ -59,6 +62,7 @@ con = psycopg2.connect(
         password=os.environ['POSTGRE_DB_PASSWORD'])
 
 cur = con.cursor()
+
 cur.execute('DROP TABLE IF EXISTS phone_models;')
 cur.execute('CREATE TABLE phone_models ('
     'brand varchar(32),'
@@ -66,5 +70,15 @@ cur.execute('CREATE TABLE phone_models ('
     'price int NOT NULL,'
     'image varchar(50));')
 
+for phone, price in zip(phones, prices):
+    image = random.choice(os.listdir(f'public/{images_dir}'))
+    print(f'Running {phone[1]} {phone[0]}; ₹{price} - {image}')
+    cur.execute('INSERT INTO phone_models (brand, model, price, image)'
+                'VALUES (%s, %s, %s, %s)',
+                (phone[0], phone[1], price, image)
+    )
+
+con.commit()
 cur.close()
+con.close()
 print('done')
