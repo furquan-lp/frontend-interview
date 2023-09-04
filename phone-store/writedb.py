@@ -87,7 +87,7 @@ for phone, price in zip(phones, prices):
     print(f'Running {phone[1]} {phone[0]}; ₹{price} - {image}')
     cur.execute('INSERT INTO phone_models (brand, model, price, image)'
                 'VALUES (%s, %s, %s, %s)',
-                (phone[0], phone[1], price, image)
+                (phone[1], phone[0], price, image)
     )
 
 con.commit()
