@@ -7,6 +7,6 @@ export async function GET() {
     const result = await conn.query(query);
     return NextResponse.json(result.rows);
   } catch (error) {
-    console.error('DB Error:', error)
+    console.error('DB Error encountered.', error);
   }
 }
