@@ -28,10 +28,10 @@ def generate_phone_name():
 
     return (f'{word} {first_letter}{second_letter}{number} {extra}'.strip(), brand_name)
 
-def generate_phone_ids(phones):
+def generate_phone_ids(phones, prices):
     ids = []
     for i in range(len(phones)):
-        ids.append(f'{phones[i][0]}{phones[i][1]}_{i}'.replace(' ', '_'))
+        ids.append(f'{phones[i][0]}{phones[i][1]}_{prices[i]}_{i}'.replace(' ', '_'))
     return ids
 
 def generate_phones(n):
@@ -59,8 +59,8 @@ def generate_prices(n):
 
 phones = generate_phones(100)
 prices = generate_prices(len(phones))
-ids = generate_phone_ids(phones)
 prices.sort()
+ids = generate_phone_ids(phones, prices)
 
 con = psycopg2.connect(
         host=os.environ['POSTGRE_DB_HOST'],
