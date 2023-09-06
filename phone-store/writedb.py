@@ -28,6 +28,12 @@ def generate_phone_name():
 
     return (f'{word} {first_letter}{second_letter}{number} {extra}'.strip(), brand_name)
 
+def generate_phone_ids(phones, prices):
+    ids = []
+    for i in range(len(phones)):
+        ids.append(f'{phones[i][0]}{phones[i][1]}_{prices[i]}_{i}'.replace(' ', '_'))
+    return ids
+
 def generate_phones(n):
     phones = []
     for i in range(n):
@@ -53,6 +59,8 @@ def generate_prices(n):
 
 phones = generate_phones(100)
 prices = generate_prices(len(phones))
+prices.sort()
+ids = generate_phone_ids(phones, prices)
 
 con = psycopg2.connect(
         host=os.environ['POSTGRE_DB_HOST'],
@@ -65,7 +73,7 @@ cur = con.cursor()
 
 if os.getenv('WRITEDB_LOGGING') == 'true':
     print('Previous data:')
-    cur.execute("CREATE OR REPLACE FUNCTION select_phone_models() RETURNS TABLE(brand varchar(32), model text, price int, image varchar(50)) AS $$ "
+    cur.execute("CREATE OR REPLACE FUNCTION select_phone_models() RETURNS TABLE(id varchar(50), brand varchar(32), model text, price int, image varchar(50)) AS $$ "
     "BEGIN "
         "IF EXISTS (SELECT FROM information_schema.tables WHERE table_schema = 'public' AND table_name = 'phone_models') THEN"
         "    RETURN QUERY SELECT * FROM \"phone_models\";"
@@ -77,17 +85,18 @@ if os.getenv('WRITEDB_LOGGING') == 'true':
 print('Dropping table...\n')
 cur.execute('DROP TABLE IF EXISTS phone_models;')
 cur.execute('CREATE TABLE phone_models ('
+    'id varchar(50) PRIMARY KEY,'
     'brand varchar(32),'
     'model text NOT NULL,'
     'price int NOT NULL,'
     'image varchar(50));')
 
-for phone, price in zip(phones, prices):
+for phone, price, id in zip(phones, prices, ids):
     image = random.choice(os.listdir(f'public/{images_dir}'))
-    print(f'Running {phone[1]} {phone[0]}; ₹{price} - {image}')
-    cur.execute('INSERT INTO phone_models (brand, model, price, image)'
-                'VALUES (%s, %s, %s, %s)',
-                (phone[0], phone[1], price, image)
+    print(f'Running {phone[1]} {phone[0]}; ₹{price} - {image}; id: {id}')
+    cur.execute('INSERT INTO phone_models (id, brand, model, price, image)'
+                'VALUES (%s, %s, %s, %s, %s)',
+                (id, phone[1], phone[0], price, image)
     )
 
 con.commit()
