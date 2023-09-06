@@ -31,7 +31,7 @@ def generate_phone_name():
 def generate_phone_ids(phones):
     ids = []
     for i in range(len(phones)):
-        ids.append(f'{phones[i][0]}{phones[i][1]}_{i}')
+        ids.append(f'{phones[i][0]}{phones[i][1]}_{i}'.replace(' ', '_'))
     return ids
 
 def generate_phones(n):
