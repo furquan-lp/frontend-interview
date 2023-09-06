@@ -60,6 +60,7 @@ def generate_prices(n):
 phones = generate_phones(100)
 prices = generate_prices(len(phones))
 ids = generate_phone_ids(phones)
+prices.sort()
 
 con = psycopg2.connect(
         host=os.environ['POSTGRE_DB_HOST'],
