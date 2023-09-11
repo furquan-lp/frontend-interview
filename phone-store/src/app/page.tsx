@@ -12,15 +12,27 @@ interface PhoneObject {
 }
 
 export default function Home() {
+  const [phoneMap, setPhoneMap] = useState<Map<string, PhoneObject[]>>(new Map());
   const [phones, setPhones] = useState<PhoneObject[]>([]);
+  const [brandfilter, setBrandfilter] = useState<string>('');
 
   useEffect(() => {
     (async function () {
       let data = await fetch('http://localhost:3000/api/db');
       let tx = await data.json();
-      setPhones(tx);
+      setPhoneMap(new Map(Object.entries(tx)));
+      setBrandfilter('none');
     })();
   }, []);
+
+  useEffect(() => {
+    let arr: PhoneObject[] = [];
+    phoneMap.forEach((value, key, map) => {
+      arr = arr.concat(value);
+    });
+    arr.sort((a, b) => a.price < b.price ? 0 : 1);
+    setPhones(arr);
+  }, [brandfilter]);
 
   return (
     <main>
@@ -32,16 +44,3 @@ export default function Home() {
     </main>
   );
 }
-
-/* export default async function Home() {
-  let data = await fetch('http://localhost:3000/api/db');
-  let tx = await data.json();
-  return (
-    <main>
-      <Header />
-      <section className='flex items-center gap-2 flex-wrap mx-2'>
-        {tx.map((t: PhoneObject) => <ProductCard name={t.model} brand={t.brand} price={t.price} imageUrl={`phones/${t.image}`} key={t.id} />)}
-      </section>
-    </main>
-  );
-} */
