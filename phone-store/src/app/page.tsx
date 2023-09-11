@@ -14,7 +14,7 @@ interface PhoneObject {
 export default function Home() {
   const [phoneMap, setPhoneMap] = useState<Map<string, PhoneObject[]>>(new Map());
   const [phones, setPhones] = useState<PhoneObject[]>([]);
-  const [brandfilter, setBrandfilter] = useState<string>('');
+  const [brandfilter, setBrandfilter] = useState<string>('none');
 
   useEffect(() => {
     (async function () {
@@ -28,7 +28,9 @@ export default function Home() {
   useEffect(() => {
     let arr: PhoneObject[] = [];
     phoneMap.forEach((value, key, map) => {
-      arr = arr.concat(value);
+      if (brandfilter === 'none' || key === brandfilter) {
+        arr = arr.concat(value);
+      }
     });
     arr.sort((a, b) => a.price < b.price ? 0 : 1);
     setPhones(arr);
