@@ -14,7 +14,7 @@ interface PhoneObject {
 export default function Home() {
   const [phoneMap, setPhoneMap] = useState<Map<string, PhoneObject[]>>(new Map());
   const [phones, setPhones] = useState<PhoneObject[]>([]);
-  const [brandfilter, setBrandfilter] = useState<string>('none');
+  const [brandfilter, setBrandfilter] = useState<string>('');
 
   useEffect(() => {
     (async function () {
@@ -38,7 +38,7 @@ export default function Home() {
 
   return (
     <main>
-      <Header />
+      <Header setFilter={setBrandfilter} />
       <section className='flex items-center gap-2 flex-wrap mx-2'>
         {phones.length && phones.map((p: PhoneObject) => <ProductCard name={p.model} brand={p.brand} price={p.price}
           imageUrl={`phones/${p.image}`} key={p.id} />)}
