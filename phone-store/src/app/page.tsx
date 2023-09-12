@@ -15,6 +15,7 @@ export default function Home() {
   const [phoneMap, setPhoneMap] = useState<Map<string, PhoneObject[]>>(new Map());
   const [phones, setPhones] = useState<PhoneObject[]>([]);
   const [brandfilter, setBrandfilter] = useState<string>('');
+  const [phoneMetadata, setPhoneMetadata] = useState<{ brands: string[] }>({ brands: [] });
 
   useEffect(() => {
     (async function () {
@@ -22,8 +23,13 @@ export default function Home() {
       let tx = await data.json();
       setPhoneMap(new Map(Object.entries(tx)));
       setBrandfilter('none');
+      let metadataBrands = await fetch('http://localhost:3000/api/metadata/brands');
+      let metadata = await metadataBrands.json();
+      setPhoneMetadata({ brands: metadata });
     })();
   }, []);
+
+  console.log(phoneMetadata)
 
   useEffect(() => {
     let arr: PhoneObject[] = [];
@@ -38,7 +44,7 @@ export default function Home() {
 
   return (
     <main>
-      <Header setFilter={setBrandfilter} />
+      <Header setBrand={setBrandfilter} brands={phoneMetadata.brands} />
       <section className='flex items-center gap-2 flex-wrap mx-2'>
         {phones.length && phones.map((p: PhoneObject) => <ProductCard name={p.model} brand={p.brand} price={p.price}
           imageUrl={`phones/${p.image}`} key={p.id} />)}
