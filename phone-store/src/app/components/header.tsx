@@ -13,6 +13,10 @@ export default function Header({ setBrand, brands }: { setBrand: Function, brand
         </select>
         <select className='p-1 px-2 rounded-md bg-white'>
           <option value='none'>Select Price</option>
+          <option value='6k'>&#8377;6000 to &#8377;10,000</option>
+          <option value='11k'>&#8377;10,000 to &#8377;20,000</option>
+          <option value='21k'>&#8377;20,000 to &#8377;30,000</option>
+          <option value='31k'>&#8377;30,000+</option>
         </select>
       </span>
       <span className='flex items-center'>
