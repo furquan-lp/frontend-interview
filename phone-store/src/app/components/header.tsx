@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-export default function Header({ setBrand, brands }: { setBrand: Function, brands: string[] }) {
+export default function Header({ setBrand, brands, setPrice }: { setBrand: Function, brands: string[], setPrice: Function }) {
   return (
     <header className='flex items-center p-2 bg-cyan-800 justify-between m-2 rounded-lg'>
       <span className='font-source-code-pro italic text-2xl text-white select-none'>phone_store</span>
@@ -11,12 +11,12 @@ export default function Header({ setBrand, brands }: { setBrand: Function, brand
           <option value='none'>Select Brand</option>
           {brands.length && brands.map(b => <option value={b}>{b}</option>)}
         </select>
-        <select className='p-1 px-2 rounded-md bg-white'>
+        <select onChange={(e) => setPrice(e.target.value)} className='p-1 px-2 rounded-md bg-white' >
           <option value='none'>Select Price</option>
-          <option value='6k'>&#8377;6000 to &#8377;10,000</option>
-          <option value='11k'>&#8377;10,000 to &#8377;20,000</option>
-          <option value='21k'>&#8377;20,000 to &#8377;30,000</option>
-          <option value='31k'>&#8377;30,000+</option>
+          <option value='6,10'>&#8377;6000 to &#8377;10,000</option>
+          <option value='11,20'>&#8377;10,000 to &#8377;20,000</option>
+          <option value='21,30'>&#8377;20,000 to &#8377;30,000</option>
+          <option value='31,90'>&#8377;30,000+</option>
         </select>
       </span>
       <span className='flex items-center'>
