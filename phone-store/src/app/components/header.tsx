@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-export default function Header({ setBrand }: { setBrand: Function }) {
+export default function Header({ setBrand, brands }: { setBrand: Function, brands: string[] }) {
   return (
     <header className='flex items-center p-2 bg-cyan-800 justify-between m-2 rounded-lg'>
       <span className='font-source-code-pro italic text-2xl text-white select-none'>phone_store</span>
@@ -9,8 +9,7 @@ export default function Header({ setBrand }: { setBrand: Function }) {
         <select onChange={(e) => setBrand(e.target.value)}
           className='p-1 px-2 rounded-md bg-white'>
           <option value='none'>Select Brand</option>
-          <option value='Samsung'>Samsung</option>
-          <option value='Apple'>Apple</option>
+          {brands.length && brands.map(b => <option value={b}>{b}</option>)}
         </select>
         <select className='p-1 px-2 rounded-md bg-white'>
           <option value='none'>Select Price</option>
