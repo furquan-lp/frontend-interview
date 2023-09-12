@@ -13,10 +13,10 @@ export default function Header({ setBrand, brands, setPrice }: { setBrand: Funct
         </select>
         <select onChange={(e) => setPrice(e.target.value)} className='p-1 px-2 rounded-md bg-white' >
           <option value='none'>Select Price</option>
-          <option value='6,10'>&#8377;6000 to &#8377;10,000</option>
-          <option value='11,20'>&#8377;10,000 to &#8377;20,000</option>
-          <option value='21,30'>&#8377;20,000 to &#8377;30,000</option>
-          <option value='31,90'>&#8377;30,000+</option>
+          <option value='0,6,10,4'>&#8377;6000 to &#8377;10,000</option>
+          <option value='1,10,20,4'>&#8377;10,000 to &#8377;20,000</option>
+          <option value='2,20,30,4'>&#8377;20,000 to &#8377;30,000</option>
+          <option value='3,30,90,4'>&#8377;30,000+</option>
         </select>
       </span>
       <span className='flex items-center'>
