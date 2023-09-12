@@ -1,16 +1,19 @@
 import Link from "next/link";
 
-export default function Header() {
+export default function Header({ setFilter }: { setFilter: Function }) {
   return (
     <header className='flex items-center p-2 bg-cyan-800 justify-between m-2 rounded-lg'>
       <span className='font-source-code-pro italic text-2xl text-white select-none'>phone_store</span>
       <span className='flex gap-x-2 items-center w-1/2'>
         <input type='text' placeholder='Enter Search Values' className='p-1 text-lg w-full rounded-lg my-0.5' />
-        <select name='brand-filter' id='brand-filter' className='p-1 px-2 rounded-md bg-white'>
-          <option value='placeholder'>Brand filter</option>
+        <select onChange={(e) => setFilter(e.target.value)}
+          className='p-1 px-2 rounded-md bg-white'>
+          <option value='none'>Select Brand</option>
+          <option value='Samsung'>Samsung</option>
+          <option value='Apple'>Apple</option>
         </select>
-        <select name='price-filter' id='price-filter' className='p-1 px-2 rounded-md bg-white'>
-          <option value='placeholder'>Price filter</option>
+        <select className='p-1 px-2 rounded-md bg-white'>
+          <option value='none'>Select Price</option>
         </select>
       </span>
       <span className='flex items-center'>
