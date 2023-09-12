@@ -9,7 +9,7 @@ export default function Header({ setBrand, brands, setPrice }: { setBrand: Funct
         <select onChange={(e) => setBrand(e.target.value)}
           className='p-1 px-2 rounded-md bg-white'>
           <option value='none'>Select Brand</option>
-          {brands.length && brands.map(b => <option value={b}>{b}</option>)}
+          {brands.length && brands.map((b, i) => <option value={b} key={b + i}>{b}</option>)}
         </select>
         <select onChange={(e) => setPrice(e.target.value)} className='p-1 px-2 rounded-md bg-white' >
           <option value='none'>Select Price</option>
