@@ -15,6 +15,34 @@ interface PriceIndex {
   a: number, b: number;
 }
 
+
+const closestSearch = function (arr: PhoneObject[], n: number): number {
+  console.log('finding', n);
+  let value = n * 1000;
+  if (value < arr[0].price) {
+    return 0;
+  }
+  if (value > arr[arr.length - 1].price) {
+    return arr.length - 1;
+  }
+
+  let lo = 0;
+  let hi = arr.length - 1;
+  while (lo <= hi) {
+    let mid = Math.floor((hi + lo) / 2);
+
+    if (value < arr[mid].price) {
+      hi = mid - 1;
+    } else if (value > arr[mid].price) {
+      lo = mid + 1;
+    } else {
+      return mid;
+    }
+  }
+
+  return (arr[lo].price - value) < (value - arr[hi].price) ? lo : hi;
+}
+
 const filterBrands = (phoneMap: Map<string, PhoneObject[]>, brandfilter: string): PhoneObject[] => {
   let arr: PhoneObject[] = [];
   if (brandfilter === 'none') {
@@ -28,6 +56,10 @@ const filterBrands = (phoneMap: Map<string, PhoneObject[]>, brandfilter: string)
   }
   arr.sort((a, b) => a.price < b.price ? 0 : 1);
   return arr;
+}
+
+const filterPrices = (phones: PhoneObject[], low: number, high: number): PhoneObject[] => {
+  return phones.slice(closestSearch(phones, low), closestSearch(phones, high));
 }
 
 export default function Home() {
@@ -59,45 +91,7 @@ export default function Home() {
   useEffect(() => {
     if (pricefilter !== 'none' && pricefilter.length) {
       let filterStr: string[] = pricefilter.split(',');
-
-      const closestSearch = function (arr: PhoneObject[], n: number): number {
-        console.log('finding', n);
-        let value = n * 1000;
-        if (value < arr[0].price) {
-          return 0;
-        }
-        if (value > arr[arr.length - 1].price) {
-          return arr.length - 1;
-        }
-
-        let lo = 0;
-        let hi = arr.length - 1;
-        while (lo <= hi) {
-          let mid = Math.floor((hi + lo) / 2);
-
-          if (value < arr[mid].price) {
-            hi = mid - 1;
-          } else if (value > arr[mid].price) {
-            lo = mid + 1;
-          } else {
-            return mid;
-          }
-        }
-
-        return (arr[lo].price - value) < (value - arr[hi].price) ? lo : hi;
-      }
-
-      if (priceIndices.current === null || priceIndices.current.length === 0) {
-        priceIndices.current = new Array<PriceIndex>(Number(filterStr[3]));
-      }
-
-      priceIndices.current[Number(filterStr[0])] = {
-        a: closestSearch(phones[1], Number(filterStr[1])),
-        b: closestSearch(phones[1], Number(filterStr[2]))
-      };
-
-      console.log('current indices', priceIndices.current);
-      setPhones([phones[1].slice(priceIndices.current[Number(filterStr[0])].a, priceIndices.current[Number(filterStr[0])].b), phones[1]]);
+      setPhones([filterPrices(phones[1], Number(filterStr[1]), Number(filterStr[2])), phones[1]]);
     } else if (pricefilter === 'none' && phones[1].length) {
       console.log('setting to')
       setPhones([phones[1], phones[1]]);
