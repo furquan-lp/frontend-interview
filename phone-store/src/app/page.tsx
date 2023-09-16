@@ -15,6 +15,21 @@ interface PriceIndex {
   a: number, b: number;
 }
 
+const filterBrands = (phoneMap: Map<string, PhoneObject[]>, brandfilter: string): PhoneObject[] => {
+  let arr: PhoneObject[] = [];
+  if (brandfilter === 'none') {
+    phoneMap.forEach((value, key, map) => {
+      if (brandfilter === 'none') {
+        arr = arr.concat(value);
+      }
+    });
+  } else {
+    arr = phoneMap.get(brandfilter)!;
+  }
+  arr.sort((a, b) => a.price < b.price ? 0 : 1);
+  return arr;
+}
+
 export default function Home() {
   const [phoneMap, setPhoneMap] = useState<Map<string, PhoneObject[]>>(new Map());
   const [phones, setPhones] = useState<[PhoneObject[], PhoneObject[]]>([[], []]);
@@ -37,14 +52,8 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-    let arr: PhoneObject[] = [];
-    phoneMap.forEach((value, key, map) => {
-      if (brandfilter === 'none' || key === brandfilter) {
-        arr = arr.concat(value);
-      }
-    });
-    arr.sort((a, b) => a.price < b.price ? 0 : 1);
-    setPhones([arr, arr]);
+    const phoneArray = filterBrands(phoneMap, brandfilter);
+    setPhones([phoneArray, phoneArray]);
   }, [brandfilter]);
 
   useEffect(() => {
