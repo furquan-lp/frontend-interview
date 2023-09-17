@@ -84,19 +84,17 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-    const phoneArray = filterBrands(phoneMap, brandfilter);
-    setPhones([phoneArray, phoneArray]);
-  }, [brandfilter]);
-
-  useEffect(() => {
-    if (pricefilter !== 'none' && pricefilter.length) {
-      let filterStr: string[] = pricefilter.split(',');
-      setPhones([filterPrices(phones[1], Number(filterStr[1]), Number(filterStr[2])), phones[1]]);
-    } else if (pricefilter === 'none' && phones[1].length) {
-      console.log('setting to')
-      setPhones([phones[1], phones[1]]);
+    if (phoneMap && brandfilter) {
+      console.log('building phone array for', brandfilter)
+      const phoneArray = filterBrands(phoneMap, brandfilter);
+      setPhones([phoneArray, phoneArray]);
+      if (pricefilter !== 'none' && pricefilter.length) {
+        console.log('filtering prices for', pricefilter)
+        let filterStr: string[] = pricefilter.split(',');
+        setPhones([filterPrices(phoneArray, Number(filterStr[1]), Number(filterStr[2])), phoneArray]);
+      }
     }
-  }, [pricefilter]);
+  }, [brandfilter, pricefilter]);
 
   return (
     <main>
