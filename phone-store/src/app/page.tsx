@@ -12,7 +12,6 @@ interface PhoneObject {
 }
 
 const closestSearch = function (arr: PhoneObject[], n: number): number {
-  console.log('finding', n);
   let value = n * 1000;
   if (value < arr[0].price) {
     return 0;
@@ -79,11 +78,9 @@ export default function Home() {
 
   useEffect(() => {
     if (phoneMap && brandfilter) {
-      console.log('building phone array for', brandfilter)
       const phoneArray = filterBrands(phoneMap, brandfilter);
       setPhones([phoneArray, phoneArray]);
       if (pricefilter !== 'none' && pricefilter.length) {
-        console.log('filtering prices for', pricefilter)
         let filterStr: string[] = pricefilter.split(',');
         setPhones([filterPrices(phoneArray, Number(filterStr[1]), Number(filterStr[2])), phoneArray]);
       }
