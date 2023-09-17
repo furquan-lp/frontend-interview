@@ -11,11 +11,6 @@ interface PhoneObject {
   image: string,
 }
 
-interface PriceIndex {
-  a: number, b: number;
-}
-
-
 const closestSearch = function (arr: PhoneObject[], n: number): number {
   console.log('finding', n);
   let value = n * 1000;
@@ -67,7 +62,6 @@ export default function Home() {
   const [phones, setPhones] = useState<[PhoneObject[], PhoneObject[]]>([[], []]);
   const [brandfilter, setBrandfilter] = useState<string>('');
   const [pricefilter, setPriceFilter] = useState<string>('');
-  const priceIndices = useRef<PriceIndex[]>([]);
   const [phoneMetadata, setPhoneMetadata] = useState<{ brands: string[] }>({ brands: [] });
 
   useEffect(() => {
