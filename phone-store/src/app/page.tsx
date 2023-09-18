@@ -56,6 +56,10 @@ const filterPrices = (phones: PhoneObject[], low: number, high: number): PhoneOb
   return phones.slice(closestSearch(phones, low), closestSearch(phones, high));
 }
 
+const filterSearch = (phones: PhoneObject[], searchString: string): PhoneObject[] => {
+  return phones.filter(p => p.brand.includes(searchString) || p.model.includes(searchString))
+}
+
 export default function Home() {
   const [phoneMap, setPhoneMap] = useState<Map<string, PhoneObject[]>>(new Map());
   const [phones, setPhones] = useState<[PhoneObject[], PhoneObject[]]>([[], []]);
@@ -80,14 +84,19 @@ export default function Home() {
 
   useEffect(() => {
     if (phoneMap && brandfilter) {
-      const phoneArray = filterBrands(phoneMap, brandfilter);
+      let phoneArray = filterBrands(phoneMap, brandfilter);
       setPhones([phoneArray, phoneArray]);
       if (pricefilter !== 'none' && pricefilter.length) {
         let filterStr: string[] = pricefilter.split(',');
-        setPhones([filterPrices(phoneArray, Number(filterStr[1]), Number(filterStr[2])), phoneArray]);
+        let pricePhoneArray = filterPrices(phoneArray, Number(filterStr[1]), Number(filterStr[2]))
+        setPhones([pricePhoneArray, phoneArray]);
+        phoneArray = pricePhoneArray;
+      }
+      if (searchFilter && searchFilter.length) {
+        setPhones([filterSearch(phoneArray, searchFilter), phones[1]]);
       }
     }
-  }, [brandfilter, pricefilter]);
+  }, [brandfilter, pricefilter, searchFilter]);
 
   return (
     <main>
