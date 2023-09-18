@@ -57,7 +57,8 @@ const filterPrices = (phones: PhoneObject[], low: number, high: number): PhoneOb
 }
 
 const filterSearch = (phones: PhoneObject[], searchString: string): PhoneObject[] => {
-  return phones.filter(p => p.brand.includes(searchString) || p.model.includes(searchString))
+  return phones.filter(p => p.brand.toLowerCase().includes(searchString.toLowerCase())
+    || p.model.toLowerCase().includes(searchString.toLowerCase()))
 }
 
 export default function Home() {
