@@ -62,6 +62,8 @@ export default function Home() {
   const [brandfilter, setBrandfilter] = useState<string>('');
   const [pricefilter, setPriceFilter] = useState<string>('');
   const [phoneMetadata, setPhoneMetadata] = useState<{ brands: string[] }>({ brands: [] });
+  const searchBarValue = useRef('');
+  const [searchFilter, setSearchFilter] = useState('');
 
   useEffect(() => {
     (async function () {
@@ -89,7 +91,8 @@ export default function Home() {
 
   return (
     <main>
-      <Header setBrand={setBrandfilter} brands={phoneMetadata.brands} setPrice={setPriceFilter} />
+      <Header setBrand={setBrandfilter} brands={phoneMetadata.brands} setPrice={setPriceFilter}
+        searchValue={searchBarValue} setSearch={setSearchFilter} />
       <section className='flex items-center gap-2 flex-wrap mx-2'>
         {phones[0].length && phones[0].map((p: PhoneObject) => <ProductCard name={p.model} brand={p.brand} price={p.price}
           imageUrl={`phones/${p.image}`} key={p.id} />)}
