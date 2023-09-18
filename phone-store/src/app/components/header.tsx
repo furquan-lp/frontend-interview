@@ -1,11 +1,20 @@
 import Link from "next/link";
+import { MutableRefObject } from "react";
 
-export default function Header({ setBrand, brands, setPrice }: { setBrand: Function, brands: string[], setPrice: Function }) {
+export default function Header({ setBrand, brands, setPrice, searchValue, setSearch }: {
+  setBrand: Function,
+  brands: string[], setPrice: Function, searchValue: MutableRefObject<string>, setSearch: Function
+}) {
   return (
     <header className='flex items-center p-2 bg-cyan-800 justify-between m-2 rounded-lg'>
       <span className='font-source-code-pro italic text-2xl text-white select-none'>phone_store</span>
       <span className='flex gap-x-2 items-center w-1/2'>
-        <input type='text' placeholder='Enter Search Values' className='p-1 text-lg w-full rounded-lg my-0.5' />
+        <input type='text' placeholder='Press enter to search...' className='p-1 text-lg w-full rounded-lg my-0.5'
+          onChange={(e) => searchValue.current = e.target.value} onKeyDown={(e) => {
+            if (e.key === 'Enter') {
+              setSearch(searchValue.current);
+            }
+          }} />
         <select onChange={(e) => setBrand(e.target.value)}
           className='p-1 px-2 rounded-md bg-white'>
           <option value='none'>Select Brand</option>
