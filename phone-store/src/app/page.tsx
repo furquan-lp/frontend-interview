@@ -1,6 +1,6 @@
 'use client';
 import { useRef, useState, useEffect } from 'react';
-import { ProductCard, ProductInfoDialog } from './components/product';
+import { ProductCard } from './components/product';
 import Header from './components/header';
 import Loading from './components/loading';
 import Script from 'next/script';
@@ -37,7 +37,7 @@ const closestSearch = function (arr: PhoneObject[], n: number): number {
   }
 
   return (arr[lo].price - value) < (value - arr[hi].price) ? lo : hi;
-}
+};
 
 const filterBrands = (phoneMap: Map<string, PhoneObject[]>, brandfilter: string): PhoneObject[] => {
   let arr: PhoneObject[] = [];
@@ -52,16 +52,16 @@ const filterBrands = (phoneMap: Map<string, PhoneObject[]>, brandfilter: string)
   }
   arr.sort((a, b) => a.price < b.price ? 0 : 1);
   return arr;
-}
+};
 
 const filterPrices = (phones: PhoneObject[], low: number, high: number): PhoneObject[] => {
   return phones.slice(closestSearch(phones, low), closestSearch(phones, high));
-}
+};
 
 const filterSearch = (phones: PhoneObject[], searchString: string): PhoneObject[] => {
   return phones.filter(p => p.brand.toLowerCase().includes(searchString.toLowerCase())
-    || p.model.toLowerCase().includes(searchString.toLowerCase()))
-}
+    || p.model.toLowerCase().includes(searchString.toLowerCase()));
+};
 
 export default function Home() {
   const [phoneMap, setPhoneMap] = useState<Map<string, PhoneObject[]>>(new Map());
@@ -91,7 +91,7 @@ export default function Home() {
       setPhones([phoneArray, phoneArray]);
       if (pricefilter !== 'none' && pricefilter.length) {
         let filterStr: string[] = pricefilter.split(',');
-        let pricePhoneArray = filterPrices(phoneArray, Number(filterStr[1]), Number(filterStr[2]))
+        let pricePhoneArray = filterPrices(phoneArray, Number(filterStr[1]), Number(filterStr[2]));
         setPhones([pricePhoneArray, phoneArray]);
         phoneArray = pricePhoneArray;
       }
@@ -109,8 +109,8 @@ export default function Home() {
           searchValue={searchBarValue} setSearch={setSearchFilter} />
         <Loading fetched={phoneMap.size > 0} results={phones[0].length} />
         <section className='flex items-center gap-2 flex-wrap mx-2'>
-          {phones[0].length ? phones[0].map((p: PhoneObject) => <ProductCard name={p.model} brand={p.brand} price={p.price}
-            imageUrl={`phones/${p.image}`} key={p.id} />) : null}
+          {phones[0].length ? phones[0].map((p: PhoneObject) => <ProductCard name={p.model} brand={p.brand}
+            price={p.price} imageUrl={`phones/${p.image}`} key={p.id} />) : null}
         </section>
       </main>
     </>
