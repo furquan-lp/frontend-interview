@@ -2,6 +2,7 @@
 import { useRef, useState, useEffect } from 'react';
 import { ProductCard, ProductInfoDialog } from './components/product';
 import Header from './components/header';
+import Loading from './components/loading';
 
 interface PhoneObject {
   id: string,
@@ -103,9 +104,10 @@ export default function Home() {
     <main>
       <Header setBrand={setBrandfilter} brands={phoneMetadata.brands} setPrice={setPriceFilter}
         searchValue={searchBarValue} setSearch={setSearchFilter} />
+      <Loading fetched={phoneMap.size > 0} results={phones[0].length} />
       <section className='flex items-center gap-2 flex-wrap mx-2'>
-        {phones[0].length && phones[0].map((p: PhoneObject) => <ProductCard name={p.model} brand={p.brand} price={p.price}
-          imageUrl={`phones/${p.image}`} key={p.id} />)}
+        {phones[0].length ? phones[0].map((p: PhoneObject) => <ProductCard name={p.model} brand={p.brand} price={p.price}
+          imageUrl={`phones/${p.image}`} key={p.id} />) : null}
       </section>
     </main>
   );
