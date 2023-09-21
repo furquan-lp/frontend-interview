@@ -1,12 +1,12 @@
 'use client';
 import { useRef, useState, useEffect } from 'react';
-import { ProductCard } from './components/product';
+import { ProductCard, ProductInfoDialog } from './components/product';
 import Header from './components/header';
 import Loading from './components/loading';
 import Script from 'next/script';
 
 interface PhoneObject {
-  id: string,
+  id?: string,
   brand: string,
   model: string,
   price: number,
@@ -69,8 +69,10 @@ export default function Home() {
   const [brandfilter, setBrandfilter] = useState<string>('');
   const [pricefilter, setPriceFilter] = useState<string>('');
   const [phoneMetadata, setPhoneMetadata] = useState<{ brands: string[] }>({ brands: [] });
-  const searchBarValue = useRef('');
-  const [searchFilter, setSearchFilter] = useState('');
+  const searchBarValue = useRef<string>('');
+  const [searchFilter, setSearchFilter] = useState<string>('');
+  const [currentCard, setCurrentCard] = useState<PhoneObject>({ brand: '', model: '', price: 0, image: '' });
+  const [productDialog, setProductDialog] = useState<boolean>(false);
 
   useEffect(() => {
     (async function () {
@@ -106,11 +108,16 @@ export default function Home() {
       <Script src='https://unpkg.com/feather-icons' onReady={() => feather.replace()} />
       <main>
         <Header setBrand={setBrandfilter} brands={phoneMetadata.brands} setPrice={setPriceFilter}
-          searchValue={searchBarValue} setSearch={setSearchFilter} />
+          searchValue={searchBarValue} setSearch={setSearchFilter} fetched={phoneMap.size > 0} />
         <Loading fetched={phoneMap.size > 0} results={phones[0].length} />
-        <section className='flex items-center gap-2 flex-wrap mx-2'>
+        <ProductInfoDialog imageUrl={currentCard.image} name={currentCard.model} brand={currentCard.brand}
+          price={currentCard.price} open={productDialog} clickClose={() => setProductDialog(false)} />
+        <section className='flex items-start gap-2 flex-wrap mx-2'>
           {phones[0].length ? phones[0].map((p: PhoneObject) => <ProductCard name={p.model} brand={p.brand}
-            price={p.price} imageUrl={`phones/${p.image}`} key={p.id} />) : null}
+            price={p.price} imageUrl={`phones/${p.image}`} key={p.id} onClick={() => {
+              setCurrentCard({ brand: p.brand, model: p.model, price: p.price, image: p.image });
+              setProductDialog(true);
+            }} />) : null}
         </section>
       </main>
     </>
