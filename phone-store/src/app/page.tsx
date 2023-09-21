@@ -108,7 +108,7 @@ export default function Home() {
         <Header setBrand={setBrandfilter} brands={phoneMetadata.brands} setPrice={setPriceFilter}
           searchValue={searchBarValue} setSearch={setSearchFilter} />
         <Loading fetched={phoneMap.size > 0} results={phones[0].length} />
-        <section className='flex items-center gap-2 flex-wrap mx-2'>
+        <section className='flex items-start gap-2 flex-wrap mx-2'>
           {phones[0].length ? phones[0].map((p: PhoneObject) => <ProductCard name={p.model} brand={p.brand}
             price={p.price} imageUrl={`phones/${p.image}`} key={p.id} />) : null}
         </section>
