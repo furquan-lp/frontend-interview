@@ -45,7 +45,7 @@ def generate_prices(n):
     # 6k to 10k
     # 10k to 20k
     # 20k to 30k
-    # 30k+
+    # 30k to 90k
     for i in range(n):
         if random.random() < 0.1:
             prices.append(random.randint(30, 90) * 1000 + random.choice([999, 998]))
@@ -82,22 +82,36 @@ if os.getenv('WRITEDB_LOGGING') == 'true':
     previous_data = cur.fetchall()
     print(previous_data)
 
-print('Dropping table...\n')
+print('Dropping tables...\n')
 cur.execute('DROP TABLE IF EXISTS phone_models;')
+cur.execute('DROP TABLE IF EXISTS phone_metadata;')
 cur.execute('CREATE TABLE phone_models ('
     'id varchar(50) PRIMARY KEY,'
     'brand varchar(32),'
     'model text NOT NULL,'
     'price int NOT NULL,'
     'image varchar(50));')
+cur.execute('CREATE TABLE phone_metadata ('
+    'brands varchar[] NOT NULL,'
+    'words varchar[] NOT NULL,'
+    'superlatives varchar[] NOT NULL,'
+    'image_files varchar[]);')
 
 for phone, price, id in zip(phones, prices, ids):
     image = random.choice(os.listdir(f'public/{images_dir}'))
     print(f'Running {phone[1]} {phone[0]}; ₹{price} - {image}; id: {id}')
     cur.execute('INSERT INTO phone_models (id, brand, model, price, image)'
                 'VALUES (%s, %s, %s, %s, %s)',
-                (id, phone[1], phone[0], price, image)
-    )
+                (id, phone[1], phone[0], price, image))
+
+brands_string = '{{"{0}"}}'.format('", "'.join(brands))
+words_string = '{{"{0}"}}'.format('", "'.join(words))
+superlatives_string = '{{"{0}"}}'.format('", "'.join(superlatives))
+image_files_string = '{{"{0}"}}'.format('", "'.join(os.listdir(f'public/{images_dir}')))
+print('Running', brands_string, words_string, superlatives_string, image_files_string)
+cur.execute('INSERT INTO phone_metadata (brands, words, superlatives, image_files)'
+            'VALUES (%s, %s, %s, %s)',
+            (brands_string, words_string, superlatives_string, image_files_string))
 
 con.commit()
 cur.close()
