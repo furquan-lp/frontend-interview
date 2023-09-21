@@ -57,7 +57,7 @@ def generate_prices(n):
             prices.append(random.randint(10, 20) * 1000 + random.choice([999, 998]))
     return prices
 
-phones = generate_phones(100)
+phones = generate_phones(1000)
 prices = generate_prices(len(phones))
 prices.sort()
 ids = generate_phone_ids(phones, prices)

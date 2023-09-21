@@ -1,5 +1,5 @@
-import Link from "next/link";
-import { MutableRefObject } from "react";
+import Link from 'next/link';
+import { MutableRefObject } from 'react';
 
 export default function Header({ setBrand, brands, setPrice, searchValue, setSearch }: {
   setBrand: Function,
