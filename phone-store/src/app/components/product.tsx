@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image from 'next/image';
 
 type ProductPhone = {
   imageUrl?: string;
@@ -27,7 +27,7 @@ export function ProductInfoDialog({ imageUrl, name, brand, price, open }: Produc
         <span>
           <span className='md:text-4xl m-1'>{name}</span>
           <span className='flex items-center m-1 my-4 text-xl'>Rating: {[...Array(5)].map((e, i) =>
-            <span data-feather="star" className='ml-1 text-yellow-500 fill-yellow-400' />)}
+            <span data-feather="star" className='ml-1 text-yellow-500 fill-yellow-400' key={e + i} />)}
           </span>
           <span className='m-1 my-2 text-xl'>By <span className='text-slate-600'>{brand || 'Unknown'}</span></span>
         </span>
