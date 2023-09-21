@@ -69,8 +69,9 @@ export default function Home() {
   const [brandfilter, setBrandfilter] = useState<string>('');
   const [pricefilter, setPriceFilter] = useState<string>('');
   const [phoneMetadata, setPhoneMetadata] = useState<{ brands: string[] }>({ brands: [] });
-  const searchBarValue = useRef('');
-  const [searchFilter, setSearchFilter] = useState('');
+  const searchBarValue = useRef<string>('');
+  const [searchFilter, setSearchFilter] = useState<string>('');
+  const [currentCard, setCurrentCard] = useState<PhoneObject>();
 
   useEffect(() => {
     (async function () {
