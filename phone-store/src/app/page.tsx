@@ -108,7 +108,7 @@ export default function Home() {
       <Script src='https://unpkg.com/feather-icons' onReady={() => feather.replace()} />
       <main>
         <Header setBrand={setBrandfilter} brands={phoneMetadata.brands} setPrice={setPriceFilter}
-          searchValue={searchBarValue} setSearch={setSearchFilter} />
+          searchValue={searchBarValue} setSearch={setSearchFilter} fetched={phoneMap.size > 0} />
         <Loading fetched={phoneMap.size > 0} results={phones[0].length} />
         <ProductInfoDialog imageUrl={currentCard.image} name={currentCard.model} brand={currentCard.brand}
           price={currentCard.price} open={productDialog} clickClose={() => setProductDialog(false)} />
