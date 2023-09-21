@@ -6,7 +6,7 @@ import Loading from './components/loading';
 import Script from 'next/script';
 
 interface PhoneObject {
-  id: string,
+  id?: string,
   brand: string,
   model: string,
   price: number,
