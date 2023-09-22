@@ -76,12 +76,12 @@ export default function Home() {
 
   useEffect(() => {
     (async function () {
-      let data = await fetch('http://localhost:3000/api/db');
+      let data = await fetch('/api/db');
       let tx = await data.json();
       setPhoneMap(new Map(Object.entries(tx)));
       setBrandfilter('none');
       setPriceFilter('none');
-      let metadataBrands = await fetch('http://localhost:3000/api/metadata/brands');
+      let metadataBrands = await fetch('/api/metadata/brands');
       let metadata = await metadataBrands.json();
       setPhoneMetadata({ brands: metadata });
     })();
