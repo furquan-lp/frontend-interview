@@ -26,7 +26,7 @@ export function ProductInfoDialog({ imageUrl, name, brand, price, open, clickClo
 }) {
   if (open) {
     return (
-      <dialog open={open} className='flex gap-x-10 p-2 border border-slate-400 shadow-lg rounded mt-6'>
+      <dialog open={open} className='flex gap-x-10 p-2 border border-slate-400 shadow-lg rounded'>
         <Image src={`/phones/${imageUrl || 'sample-phone.webp'}`} width={320} height={480} alt={`product ${name} photo`}
           className='m-2 mx-10' />
         <section className='flex flex-col mt-10 justify-around'>
