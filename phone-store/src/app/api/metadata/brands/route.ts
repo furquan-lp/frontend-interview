@@ -7,5 +7,6 @@ export async function GET() {
     return NextResponse.json(metadata.rows[0].brands);
   } catch (error) {
     console.error('DB Error encountered.', error);
+    return NextResponse.json({ status: 400 });
   }
 }
