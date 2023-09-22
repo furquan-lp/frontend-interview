@@ -10,7 +10,8 @@ type ProductPhone = {
 
 export function ProductCard({ imageUrl, name, brand, price, onClick }: ProductPhone & { onClick: MouseEventHandler }) {
   return (
-    <article className='flex flex-col items-center p-2 border border-slate-300 rounded-md shadow-md cursor-pointer'
+    <article className='flex flex-col items-center p-2 border border-slate-300 rounded-md shadow-md cursor-pointer
+     hover:border-slate-500 hover:bg-slate-100'
       onClick={onClick}>
       <Image src={`/${imageUrl || 'sample-phone.webp'}`} width={220} height={380} alt='product phone photo' />
       <span className='text-xl'>{name}</span>
@@ -26,7 +27,7 @@ export function ProductInfoDialog({ imageUrl, name, brand, price, open, clickClo
 }) {
   if (open) {
     return (
-      <dialog open={open} className='flex gap-x-10 p-2 border border-slate-400 shadow-lg rounded mt-6'>
+      <dialog open={open} className='flex gap-x-10 p-2 border border-slate-400 shadow-lg rounded'>
         <Image src={`/phones/${imageUrl || 'sample-phone.webp'}`} width={320} height={480} alt={`product ${name} photo`}
           className='m-2 mx-10' />
         <section className='flex flex-col mt-10 justify-around'>

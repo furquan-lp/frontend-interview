@@ -13,5 +13,6 @@ export async function GET() {
     return NextResponse.json(Object.fromEntries(map1));
   } catch (error) {
     console.error('DB Error encountered.', error);
+    return NextResponse.json({ status: 400 });
   }
 }
