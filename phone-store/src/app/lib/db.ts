@@ -7,7 +7,6 @@ let conn = new Pool({
   port: Number(process.env.PGSQL_PORT),
   database: process.env.PGSQL_DATABASE,
   ssl: {
-    sslmode: 'require',
     rejectUnauthorized: false,
   }
 });
