@@ -105,7 +105,10 @@ export default function Home() {
 
   return (
     <>
-      <Script src='https://unpkg.com/feather-icons' onReady={() => feather.replace()} />
+      <Script src='https://unpkg.com/feather-icons' onReady={
+        //@ts-ignore
+        () => feather.replace()
+      } />
       <main>
         <Header setBrand={setBrandfilter} brands={phoneMetadata.brands} setPrice={setPriceFilter}
           searchValue={searchBarValue} setSearch={setSearchFilter} fetched={phoneMap.size > 0} />
