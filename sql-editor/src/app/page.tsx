@@ -1,4 +1,5 @@
 import Header from './components/header';
+import SQLOutputField from './components/outputfield';
 import SQLField from './components/sqlfield';
 
 export default function Home() {
@@ -7,7 +8,7 @@ export default function Home() {
       <Header />
       <article className='flex gap-x-2 m-2'>
         <SQLField />
-        <SQLField />
+        <SQLOutputField />
       </article>
     </main>
   );
