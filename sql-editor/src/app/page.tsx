@@ -1,7 +1,15 @@
+import Header from './components/header';
+import SQLOutputField from './components/outputfield';
+import SQLField from './components/sqlfield';
+
 export default function Home() {
   return (
-    <main className=''>
-      <div className='font-bold text-xl'>Blank Project</div>
+    <main className='flex flex-col'>
+      <Header />
+      <article className='flex gap-x-2 m-2'>
+        <SQLField />
+        <SQLOutputField />
+      </article>
     </main>
   );
 }
