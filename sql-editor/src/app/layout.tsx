@@ -28,7 +28,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${patua.variable} ${sourceCodePro.variable}`}>
       <head>
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+        <link href="https://fonts.googleapis.com/icon?family=Material+Symbols+Outlined"
           rel="stylesheet" />
       </head>
       <body>{children}</body>
