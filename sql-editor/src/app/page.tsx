@@ -6,7 +6,7 @@ export default function Home() {
   return (
     <main className='flex flex-col dark:bg-slate-700'>
       <Header version={0.1} />
-      <article className='flex gap-x-2 m-2'>
+      <article className='flex flex-wrap md:flex-nowrap gap-y-2 md:gap-x-2 m-2'>
         <SQLField />
         <SQLOutputField />
       </article>
