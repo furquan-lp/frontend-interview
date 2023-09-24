@@ -4,8 +4,8 @@ import SQLField from './components/sqlfield';
 
 export default function Home() {
   return (
-    <main className='flex flex-col'>
-      <Header />
+    <main className='flex flex-col dark:bg-slate-700'>
+      <Header version={0.1} />
       <article className='flex gap-x-2 m-2'>
         <SQLField />
         <SQLOutputField />
