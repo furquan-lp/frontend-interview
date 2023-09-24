@@ -1,6 +1,12 @@
 import './globals.css';
 import type { Metadata } from 'next';
-import { Patua_One } from 'next/font/google';
+import { Patua_One, Source_Code_Pro } from 'next/font/google';
+
+const sourceCodePro = Source_Code_Pro({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-source-code-pro'
+});
 
 const patua = Patua_One({
   subsets: ['latin'],
@@ -20,7 +26,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={`${patua.variable}`}>
+    <html lang="en" className={`${patua.variable} ${sourceCodePro.variable}`}>
       <head>
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
           rel="stylesheet" />
