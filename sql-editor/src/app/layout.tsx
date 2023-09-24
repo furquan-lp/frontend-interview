@@ -1,5 +1,13 @@
 import './globals.css';
 import type { Metadata } from 'next';
+import { Patua_One } from 'next/font/google';
+
+const patua = Patua_One({
+  subsets: ['latin'],
+  weight: '400',
+  display: 'swap',
+  variable: '--font-patua'
+});
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -12,7 +20,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
+    <html lang="en" className={`${patua.variable}`}>
       <head>
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
           rel="stylesheet" />
