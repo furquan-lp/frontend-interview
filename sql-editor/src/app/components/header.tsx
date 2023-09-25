@@ -1,7 +1,7 @@
 import { MouseEventHandler } from 'react';
 
 export default function Header({ version, clickRun, setDarkMode, theme }: {
-  version?: number, clickRun: MouseEventHandler, setDarkMode: Function, theme: string
+  version?: number, clickRun: MouseEventHandler<HTMLElement>, setDarkMode: Function, theme: string
 }) {
   return (
     <header className='flex items-center justify-between bg-emerald-700 dark:bg-sky-700 p-2 text-white'>
