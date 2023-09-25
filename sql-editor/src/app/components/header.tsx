@@ -13,7 +13,7 @@ export default function Header({ version, setDarkMode }: { version?: number, set
       <span className='flex gap-1 items-center'>
         <button className='material-symbols-outlined hover:bg-emerald-600 dark:hover:bg-sky-600 p-1 rounded-full'
           onClick={() => setDarkMode(!(localStorage.getItem('darkmode') === 'true'))}>
-          {localStorage.getItem('darkmode') === 'true' ? <>dark_mode</> : <>light_mode</>}</button>
+          {localStorage.getItem('darkmode') === 'true' ? <>light_mode</> : <>dark_mode</>}</button>
         <a href='https://github.com/furquan-lp/frontend-interview/tree/master/sql-editor'
           className='material-symbols-outlined border p-0.5 rounded-md select-none'>code</a>
       </span>
