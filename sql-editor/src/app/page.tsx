@@ -9,8 +9,8 @@ import { useDB } from './lib/hooks';
 
 export default function Home() {
   const [darkMode, setDarkMode] = useState('');
+  const [messages, setMessages] = useState<string[]>([]);
   let editorText = useRef('');
-
   const database: any = useDB();
 
   const runQuery = (db: any, query: string) => {
@@ -57,7 +57,7 @@ export default function Home() {
           theme={darkMode} />
         <article className='flex flex-wrap md:flex-nowrap gap-y-2 md:gap-x-2 m-2'>
           <SQLField onChange={(e) => editorText.current = e.target.value} loaded={database !== null} />
-          <SQLOutputField text={database === null ? undefined : 'Loaded SQLite from sql.js v1.8.0.'} />
+          <SQLOutputField messages={database === null ? undefined : ['Loaded SQLite from sql.js v1.8.0.']} />
         </article>
         <Footer />
       </main>
