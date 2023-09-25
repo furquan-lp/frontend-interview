@@ -1,5 +1,5 @@
 'use client';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Header from './components/header';
 import SQLOutputField from './components/outputfield';
 import SQLField from './components/sqlfield';
@@ -7,6 +7,7 @@ import Footer from './components/footer';
 import Script from 'next/script';
 export default function Home() {
   const [darkMode, setDarkMode] = useState('');
+  let editorText = useRef('');
 
   useEffect(() => {
     if (darkMode === '') {
@@ -28,7 +29,7 @@ export default function Home() {
       <main className='flex flex-col dark:bg-slate-700 min-h-screen'>
         <Header version={0.3} setDarkMode={setDarkMode} theme={darkMode} />
         <article className='flex flex-wrap md:flex-nowrap gap-y-2 md:gap-x-2 m-2'>
-          <SQLField />
+          <SQLField onChange={(e) => editorText.current = e.target.value} />
           <SQLOutputField />
         </article>
         <Footer />
