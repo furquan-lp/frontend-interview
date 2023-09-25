@@ -9,31 +9,25 @@ import { useDB } from './lib/hooks';
 
 export default function Home() {
   const [darkMode, setDarkMode] = useState('');
-  const [messages, setMessages] = useState<string[]>([]);
+  const [messages, setMessages] = useState<string[]>(['Loaded SQLite from sql.js v1.8.0.']);
   let editorText = useRef('');
   const database: any = useDB();
 
-  const runQuery = (db: any, query: string) => {
+  const runQuery = (query: string) => {
+    console.log('trying')
     try {
-      console.log(db.exec(query));
+      let result: string = database.exec(query);
+      console.log('result is', result);
+      logOutputText('' + JSON.stringify(result));
     } catch (e: any) {
-      console.error(e);
+      logOutputText('' + e);
     };
-  }
+  };
 
-  /*useEffect(() => {
-    if (database !== null && !ran.current) {
-      console.log('ran')
-      database.exec('DROP TABLE IF EXISTS hello;');
-      database.exec('DROP TABLE IF EXISTS hello2;');
-      database.exec("CREATE TABLE hello (a int, b char); \
-      INSERT INTO hello VALUES (0, 'hello'); \
-      INSERT INTO hello VALUES (1, 'world');");
-      database.exec('CREATE TABLE hello2(i int);')
-      console.log(database.exec("SELECT name FROM sqlite_master WHERE type='table';"));
-      ran.current = true;
-    }
-  }, [database])*/
+  const logOutputText = (message: string) => {
+    console.log('setting to', message)
+    setMessages([...messages, message]);
+  };
 
   useEffect(() => {
     if (darkMode === '') {
@@ -53,11 +47,14 @@ export default function Home() {
     <>
       <Script type="module" strategy='beforeInteractive' src="/sql-loader.js" />
       <main className='flex flex-col dark:bg-slate-700 min-h-screen'>
-        <Header version={0.5} clickRun={() => runQuery(database, editorText.current)} setDarkMode={setDarkMode}
+        <Header version={0.5} clickRun={() => {
+          console.log('running')
+          runQuery(editorText.current);
+        }} setDarkMode={setDarkMode}
           theme={darkMode} />
         <article className='flex flex-wrap md:flex-nowrap gap-y-2 md:gap-x-2 m-2'>
           <SQLField onChange={(e) => editorText.current = e.target.value} loaded={database !== null} />
-          <SQLOutputField messages={database === null ? undefined : ['Loaded SQLite from sql.js v1.8.0.']} />
+          <SQLOutputField messages={database === null ? undefined : messages} />
         </article>
         <Footer />
       </main>
