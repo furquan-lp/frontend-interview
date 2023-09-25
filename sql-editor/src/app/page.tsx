@@ -13,6 +13,28 @@ export default function Home() {
 
   const database: any = useDB();
 
+  const runQuery = (db: any, query: string) => {
+    try {
+      console.log(db.exec(query));
+    } catch (e: any) {
+      console.error(e);
+    };
+  }
+
+  /*useEffect(() => {
+    if (database !== null && !ran.current) {
+      console.log('ran')
+      database.exec('DROP TABLE IF EXISTS hello;');
+      database.exec('DROP TABLE IF EXISTS hello2;');
+      database.exec("CREATE TABLE hello (a int, b char); \
+      INSERT INTO hello VALUES (0, 'hello'); \
+      INSERT INTO hello VALUES (1, 'world');");
+      database.exec('CREATE TABLE hello2(i int);')
+      console.log(database.exec("SELECT name FROM sqlite_master WHERE type='table';"));
+      ran.current = true;
+    }
+  }, [database])*/
+
   useEffect(() => {
     if (darkMode === '') {
       localStorage.removeItem('theme');
@@ -31,7 +53,8 @@ export default function Home() {
     <>
       <Script type="module" strategy='beforeInteractive' src="/sql-loader.js" />
       <main className='flex flex-col dark:bg-slate-700 min-h-screen'>
-        <Header version={0.5} clickRun={() => console.log('run')} setDarkMode={setDarkMode} theme={darkMode} />
+        <Header version={0.5} clickRun={() => runQuery(database, editorText.current)} setDarkMode={setDarkMode}
+          theme={darkMode} />
         <article className='flex flex-wrap md:flex-nowrap gap-y-2 md:gap-x-2 m-2'>
           <SQLField onChange={(e) => editorText.current = e.target.value} loaded={database !== null} />
           <SQLOutputField text={database === null ? undefined : 'Loaded SQLite from sql.js v1.8.0.'} />
