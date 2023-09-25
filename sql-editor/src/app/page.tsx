@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import Header from './components/header';
 import SQLOutputField from './components/outputfield';
 import SQLField from './components/sqlfield';
+import Footer from './components/footer';
 
 export default function Home() {
   const [darkMode, setDarkMode] = useState('');
@@ -22,12 +23,13 @@ export default function Home() {
   }, [darkMode]);
 
   return (
-    <main className='flex flex-col dark:bg-slate-700'>
+    <main className='flex flex-col dark:bg-slate-700 min-h-screen'>
       <Header version={0.1} setDarkMode={setDarkMode} theme={darkMode} />
       <article className='flex flex-wrap md:flex-nowrap gap-y-2 md:gap-x-2 m-2'>
         <SQLField />
         <SQLOutputField />
       </article>
+      <Footer />
     </main>
   );
 }
