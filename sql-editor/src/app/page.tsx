@@ -5,14 +5,20 @@ import SQLOutputField from './components/outputfield';
 import SQLField from './components/sqlfield';
 
 export default function Home() {
-  const [darkMode, setDarkMode] = useState(false);
+  const [darkMode, setDarkMode] = useState('');
 
   useEffect(() => {
-    localStorage.setItem('darkmode', 'false');
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem('darkmode', String(darkMode));
+    if (darkMode === '') {
+      localStorage.removeItem('theme');
+    } else {
+      localStorage.theme = darkMode;
+    }
+    if (localStorage.theme === 'dark' || (!('theme' in localStorage) &&
+      window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.classList.add('dark')
+    } else {
+      document.documentElement.classList.remove('dark')
+    }
   }, [darkMode]);
 
   return (
