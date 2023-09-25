@@ -1,4 +1,7 @@
-export default function Header({ version, setDarkMode }: { version?: number, setDarkMode: Function }) {
+export default function Header({ version, setDarkMode, theme }: {
+  version?: number, setDarkMode: Function,
+  theme: string
+}) {
   return (
     <header className='flex items-center justify-between bg-emerald-700 dark:bg-sky-700 p-2 text-white'>
       <span className='flex gap-1 items-center'>
@@ -12,8 +15,8 @@ export default function Header({ version, setDarkMode }: { version?: number, set
       </span>
       <span className='flex gap-1 items-center'>
         <button className='material-symbols-outlined hover:bg-emerald-600 dark:hover:bg-sky-600 p-1 rounded-full'
-          onClick={() => setDarkMode(localStorage.theme === 'dark' ? 'light' : 'dark')}>
-          {localStorage.theme === 'light' ? <>light_mode</> : <>dark_mode</>}</button>
+          onClick={() => setDarkMode(theme === 'dark' ? 'light' : 'dark')}>
+          {theme === 'dark' ? <>light_mode</> : <>dark_mode</>}</button>
         <a href='https://github.com/furquan-lp/frontend-interview/tree/master/sql-editor'
           className='material-symbols-outlined border p-0.5 rounded-md select-none'>code</a>
       </span>
