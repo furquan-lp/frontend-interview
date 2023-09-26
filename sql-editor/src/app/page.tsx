@@ -8,7 +8,7 @@ import Script from 'next/script';
 import { useDB } from './lib/hooks';
 import ViewTable from './components/viewtable';
 
-type TableNames = [
+type TableType = [
   {
     columns: string[];
     values: [string[]];
@@ -23,23 +23,22 @@ export default function Home() {
   const database: any = useDB();
 
   const runQuery = (query: string) => {
-    console.log('trying')
     try {
-      let result: string = database.exec(query);
+      let result: [] = database.exec(query);
       console.log('result is', result);
-      logOutputText('' + JSON.stringify(result));
+      logOutputText(result.length === 0 ? `Query "${query.substring(0, 20)}..." ran successfully.`
+        : '' + JSON.stringify(result));
     } catch (e: any) {
       logOutputText('' + e);
     };
   };
 
   const logOutputText = (message: string) => {
-    console.log('setting to', message)
     setMessages([...messages, message]);
   };
 
   const fetchTableNames = () => {
-    const tableResults: TableNames = database.exec("SELECT name FROM sqlite_master WHERE type='table';");
+    const tableResults: TableType = database.exec("SELECT name FROM sqlite_master WHERE type='table';");
     setTables(tableResults[0].values.map(v => v[0]));
   }
 
@@ -73,10 +72,7 @@ export default function Home() {
     <>
       <Script type="module" strategy='beforeInteractive' src="/sql-loader.js" />
       <main className='flex flex-col dark:bg-slate-700 min-h-screen'>
-        <Header version={0.7} clickRun={() => {
-          console.log('running', editorText.current)
-          runQuery(editorText.current);
-        }} setDarkMode={setDarkMode}
+        <Header version={0.7} clickRun={() => runQuery(editorText.current)} setDarkMode={setDarkMode}
           theme={darkMode} />
         <article className='flex flex-wrap md:flex-nowrap gap-y-2 mx-1 my-2 md:gap-x-2 md:m-2'>
           <SQLField onChange={(e) => editorText.current = e.target.value} loaded={database !== null} />
