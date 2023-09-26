@@ -1,3 +1,4 @@
+import Footer from './components/Footer';
 import Header from './components/Header';
 
 function AssignmentCardTag({ tag }: { tag: string }) {
@@ -84,6 +85,7 @@ function App() {
           </ul>
         </AssignmentCard>
       </section>
+      <Footer />
     </main>
   );
 }
