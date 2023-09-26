@@ -13,10 +13,10 @@ function AssignmentCard({ title, blurb, image, tags, livelink, repolink, childre
 }) {
   return (
     <article className='flex flex-col gap-y-2 border rounded border-white p-2 text-white w-full bg-white/5'>
-      <section className='flex flex-col border-b'>
+      <header className='flex flex-col border-b'>
         <span className='text-3xl font-bold'>{title}</span>
         {tags && <div className='flex my-2'>{tags.map(t => <AssignmentCardTag tag={t} />)}</div>}
-      </section>
+      </header>
       <section className='flex gap-x-2 justify-between'>
         <div className='flex flex-col justify-around md:w-2/3'>
           <span className='text-xl'>{blurb}</span>
@@ -51,7 +51,7 @@ function App() {
             <div className='font-bold md:text-xl mb-2'>Features:</div>
             <li>Execute SQL code locally without requiring an external database or a file and display the output of
               queries being run</li>
-            <li>Live viewing of all the tables in the database</li>
+            <li>Live viewing of any table in the database</li>
             <li>Seamless toggle for dark mode theming while respecting system choice</li>
             <li>Run on a mobile screen or smaller sized viewports (responsive design)</li>
           </ul>
