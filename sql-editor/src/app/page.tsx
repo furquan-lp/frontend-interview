@@ -81,7 +81,13 @@ export default function Home() {
     <>
       <Script type="module" strategy='beforeInteractive' src="/sql-loader.js" />
       <main className='flex flex-col dark:bg-slate-700 min-h-screen'>
-        <Header version={0.8} clickRun={() => runQuery(editorText.current)} setDarkMode={setDarkMode}
+        <Header version={0.8} clickRun={() => runQuery(editorText.current)} clickClear={() => {
+          let e = document.getElementById('sqltextarea') as HTMLTextAreaElement;
+          if (e) {
+            e.value = '';
+            editorText.current = '';
+          }
+        }} setDarkMode={setDarkMode}
           theme={darkMode} />
         <article className='flex flex-wrap md:flex-nowrap gap-y-2 mx-1 my-2 md:gap-x-2 md:m-2'>
           <SQLField onChange={(e) => editorText.current = e.target.value} loaded={database !== null} />
