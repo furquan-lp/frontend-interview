@@ -99,25 +99,22 @@ export default function Home() {
   }, [currentTable]);
 
   return (
-    <>
-      <Script type="module" strategy='beforeInteractive' src="/sql-loader.js" />
-      <main className='flex flex-col gap-y-2 dark:bg-slate-700 min-h-screen'>
-        <Header version={globalVersion} clickRun={() => runQuery(editorText.current)} clickClear={() => {
-          let e = document.getElementById('sqltextarea') as HTMLTextAreaElement;
-          if (e) {
-            e.value = '';
-            editorText.current = '';
-            setMessages([`SQL Editor version ${globalVersion}`]);
-          }
-        }} setDarkMode={setDarkMode}
-          theme={darkMode} />
-        <article className='flex flex-wrap md:flex-nowrap gap-y-2 mx-1 md:gap-x-2 md:mx-2'>
-          <SQLField onChange={(e) => editorText.current = e.target.value} loaded={database !== null} />
-          <SQLOutputField messages={database === null ? undefined : messages} />
-        </article>
-        <ViewTable tables={tables} setTable={setCurrentTable} clickSync={() => fetchTableNames()} viewTable={viewingTable} />
-        <Footer />
-      </main>
-    </>
+    <main className='flex flex-col gap-y-2 dark:bg-slate-700 min-h-screen'>
+      <Header version={globalVersion} clickRun={() => runQuery(editorText.current)} clickClear={() => {
+        let e = document.getElementById('sqltextarea') as HTMLTextAreaElement;
+        if (e) {
+          e.value = '';
+          editorText.current = '';
+          setMessages([`SQL Editor version ${globalVersion}`]);
+        }
+      }} setDarkMode={setDarkMode}
+        theme={darkMode} />
+      <article className='flex flex-wrap md:flex-nowrap gap-y-2 mx-1 md:gap-x-2 md:mx-2'>
+        <SQLField onChange={(e) => editorText.current = e.target.value} loaded={database !== null} />
+        <SQLOutputField messages={database === null ? undefined : messages} />
+      </article>
+      <ViewTable tables={tables} setTable={setCurrentTable} clickSync={() => fetchTableNames()} viewTable={viewingTable} />
+      <Footer />
+    </main>
   );
 }
