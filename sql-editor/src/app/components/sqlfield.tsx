@@ -1,4 +1,4 @@
-import { ChangeEventHandler } from "react";
+import { ChangeEventHandler } from 'react';
 
 export default function SQLField({ onChange, loaded }: {
   onChange: ChangeEventHandler<HTMLTextAreaElement>,

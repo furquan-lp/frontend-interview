@@ -36,7 +36,7 @@ export default function Home() {
   };
 
   const fetchTableNames = () => {
-    const tableResults: TableType = database.exec("SELECT name FROM sqlite_master WHERE type='table';");
+    const tableResults: TableType = database.exec('SELECT name FROM sqlite_master WHERE type=\'table\';');
     setTables(tableResults[0].values.map(v => v[0]));
   }
 

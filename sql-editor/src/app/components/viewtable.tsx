@@ -1,5 +1,5 @@
-import { MouseEventHandler } from "react";
-import { TableType } from "../lib/types";
+import { MouseEventHandler } from 'react';
+import { TableType } from '../lib/types';
 
 export default function ViewTable({ tables, setTable, clickSync, viewTable }: {
   tables: string[],
