@@ -1,8 +1,9 @@
 import { MouseEventHandler } from "react";
 import { TableType } from "../lib/types";
 
-export default function ViewTable({ tables, viewTable, clickSync }: {
+export default function ViewTable({ tables, setTable, clickSync, viewTable }: {
   tables: string[],
+  setTable: Function,
   clickSync: MouseEventHandler<HTMLElement>,
   viewTable: TableType | null
 }) {
@@ -10,7 +11,7 @@ export default function ViewTable({ tables, viewTable, clickSync }: {
     <article className='flex flex-col gap-2 grow text-slate-700 dark:text-slate-50'>
       <section className='flex gap-2 items-center md:text-lg m-1 md:m-2'>
         <span>Spectating Table:</span>
-        <select className='p-1 px-2 rounded-md bg-slate-200 dark:bg-slate-600'>
+        <select className='p-1 px-2 rounded-md bg-slate-200 dark:bg-slate-600' onChange={(e) => setTable(e.target.value)}>
           <option value='none'>Select Table</option>
           {tables.length && tables.map((t, i) => <option value={`${t}`} key={t + ViewTable + i}>{t}</option>)}
         </select>
@@ -25,7 +26,7 @@ export default function ViewTable({ tables, viewTable, clickSync }: {
           </tr>
         </thead>
         <tbody>
-          {viewTable[0].values.map(r => <tr>{r.map(v =>
+          {viewTable[0].values.map((r, i) => <tr key={i + r.toString()}>{r.map(v =>
             <td className="border border-slate-400 dark:border-slate-500" key={v}>{v}</td>)}</tr>)}
         </tbody>
       </table>
