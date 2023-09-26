@@ -9,10 +9,12 @@ function AssignmentCardTag({ tag }: { tag: string }) {
 
 function AssignmentCard({ title, description, tags }: { title: string, description: string, tags?: string[] }) {
   return (
-    <section className='border rounded border-white p-2 text-white my-4 md:my-10 w-full bg-white/5'>
-      <span className='text-3xl font-bold'>{title}</span>
-      {tags && <div className='flex my-2'>{tags.map(t => <AssignmentCardTag tag={t} />)}</div>}
-    </section>
+    <article className='border rounded border-white p-2 text-white my-4 md:my-10 w-full bg-white/5'>
+      <section className='flex flex-col border-b'>
+        <span className='text-3xl font-bold'>{title}</span>
+        {tags && <div className='flex my-2'>{tags.map(t => <AssignmentCardTag tag={t} />)}</div>}
+      </section>
+    </article>
   );
 }
 
@@ -21,8 +23,7 @@ function App() {
     <main>
       <Header />
       <section className='flex flex-col items-center md:mt-10 w-1/2 mx-auto'>
-        <span className='text-white text-2xl italic'>A small collection of frontend web developer interview questions
-          and assignments. </span>
+        <span className='text-white text-2xl italic'>Welcome to my frontend portfolio. </span>
         <AssignmentCard title='React Circles' description='foo bar' tags={['React', 'TypeScript']} />
       </section>
     </main>
