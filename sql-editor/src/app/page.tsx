@@ -9,7 +9,7 @@ import { useDB } from './lib/hooks';
 import ViewTable from './components/viewtable';
 import { TableType } from './lib/types';
 
-const globalVersion = 0.8;
+const globalVersion = 0.9;
 
 export default function Home() {
   const [darkMode, setDarkMode] = useState('');
@@ -44,12 +44,8 @@ export default function Home() {
 
   useEffect(() => {
     if (database) {
-      database.exec('DROP TABLE IF EXISTS hello;');
       database.exec('DROP TABLE IF EXISTS cars;');
       database.exec('DROP TABLE IF EXISTS states;');
-      database.exec('CREATE TABLE hello (a int, b char, name varchar(32)); \
-      INSERT INTO hello VALUES (0, \'hello\', \'syed\'); \
-      INSERT INTO hello VALUES (1, \'world\', \'furquan\');');
       database.exec('CREATE TABLE cars ( \
         id INT PRIMARY KEY, \
         name VARCHAR(50), \
