@@ -1,4 +1,9 @@
-export default function ViewTable({ tables }: { tables: string[] }) {
+import { MouseEventHandler } from "react";
+
+export default function ViewTable({ tables, clickSync }: {
+  tables: string[],
+  clickSync: MouseEventHandler<HTMLElement>
+}) {
   return (
     <section className='flex gap-2 items-center text-slate-700 dark:text-slate-50 md:text-lg m-1 md:m-2'>
       <span>Spectating Table:</span>
@@ -7,7 +12,7 @@ export default function ViewTable({ tables }: { tables: string[] }) {
         {tables.length && tables.map((t, i) => <option value={`${t}`} key={t + ViewTable + i}>{t}</option>)}
       </select>
       <button className='material-symbols-outlined text-slate-600 hover:bg-slate-100 dark:text-slate-100
-       dark:hover:bg-slate-600 p-1 rounded-full'>Sync</button>
+       dark:hover:bg-slate-600 p-1 rounded-full' onClick={clickSync}>Sync</button>
     </section>
   );
 };
