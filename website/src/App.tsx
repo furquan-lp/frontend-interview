@@ -56,6 +56,20 @@ function App() {
             <li>Run on a mobile screen or smaller sized viewports (responsive design)</li>
           </ul>
         </AssignmentCard>
+        <AssignmentCard title='Phone Store' blurb='A Next.js store front website with search and filters, running
+         without any backend server.'
+          image='/phone-store-screenshot.webp' tags={['Next.js', 'TypeScript', 'PostgreSQL', 'Python', 'Flask']}
+          livelink='https://store.frontend.nextdev.in/'
+          repolink='https://github.com/furquan-lp/frontend-interview/tree/master/phone-store'>
+          <ul className='list-disc list-inside md:text-lg'>
+            <div className='font-bold md:text-xl mb-2'>Features:</div>
+            <li>Fetch the data from the PostgreSQL database using Next.js API routes and node/pg</li>
+            <li>Filters for search, brand and price</li>
+            <li>Price filters use a modified binary search and brand filters use a cached Map allowing them to be ~3-4x
+              faster than linear solutions.</li>
+            <li>Data written to the PostgreSQL database using a Flask application</li>
+          </ul>
+        </AssignmentCard>
         <AssignmentCard title='React Circles' blurb='This is a frontend React interview assignment (junior level).
          Written in TypeScript and React, built with Vite.' image='/react-circles-screenshot.webp'
           tags={['React', 'TypeScript']} livelink='https://circles.frontend.nextdev.in/'
