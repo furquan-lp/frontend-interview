@@ -12,9 +12,9 @@ export function useDB() {
         if (window.loadSQL) {
           console.log('Clearing timer');
           clearInterval(timer);
-          setWindowWatcher(true)
+          setWindowWatcher(true);
         }
-      }, 500)
+      }, 500);
     }
   }, []);
 
