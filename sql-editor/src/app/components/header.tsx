@@ -1,7 +1,8 @@
 import { MouseEventHandler } from 'react';
 
-export default function Header({ version, clickRun, setDarkMode, theme }: {
-  version?: number, clickRun: MouseEventHandler<HTMLElement>, setDarkMode: Function, theme: string
+export default function Header({ version, clickRun, clickClear, setDarkMode, theme }: {
+  version?: number, clickRun: MouseEventHandler<HTMLElement>, clickClear: MouseEventHandler<HTMLElement>,
+  setDarkMode: Function, theme: string
 }) {
   return (
     <header className='flex items-center justify-between bg-emerald-700 dark:bg-sky-800 p-2 text-white'>
@@ -11,7 +12,7 @@ export default function Header({ version, clickRun, setDarkMode, theme }: {
          text-lg font-bold ml-6 px-2 p-1'><span className='hidden md:inline' onClick={clickRun}>Run</span> <span
             className='material-symbols-outlined align-[-6px]'>arrow_forward</span></button>
         <button className='rounded bg-emerald-600 active:bg-emerald-500 dark:bg-sky-700 dark:active:bg-sky-600
-         text-lg font-bold px-2 p-1'><span className='hidden md:inline'>Clear</span> <span
+         text-lg font-bold px-2 p-1'><span className='hidden md:inline' onClick={clickClear}>Clear</span> <span
             className='material-symbols-outlined align-[-6px]'>clear_all</span></button>
       </span>
       <span className='flex gap-1 items-center'>
