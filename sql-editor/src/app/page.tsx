@@ -45,12 +45,37 @@ export default function Home() {
   useEffect(() => {
     if (database) {
       database.exec('DROP TABLE IF EXISTS hello;');
-      database.exec('DROP TABLE IF EXISTS hello2;');
-      database.exec('CREATE TABLE hello21 (i int, j int);');
+      database.exec('DROP TABLE IF EXISTS cars;');
+      database.exec('DROP TABLE IF EXISTS states;');
       database.exec('CREATE TABLE hello (a int, b char, name varchar(32)); \
       INSERT INTO hello VALUES (0, \'hello\', \'syed\'); \
       INSERT INTO hello VALUES (1, \'world\', \'furquan\');');
-      logOutputText('Created dummy tables.');
+      database.exec('CREATE TABLE cars ( \
+        id INT PRIMARY KEY, \
+        name VARCHAR(50), \
+        model VARCHAR(50), \
+        year INT, \
+        maker VARCHAR(50), \
+        price DECIMAL(10,2) \
+      );');
+      database.exec('INSERT INTO cars (id, name, model, year, maker, price) VALUES \
+                      (1, \'Toyota\', \'Corolla\', \'2018\', \'Toyota\', 25000.00), \
+                      (2, \'Ford\', \'Focus\', \'2015\', \'Ford\', 18000.00), \
+                      (3, \'Honda\', \'Civic\', \'2017\', \'Honda\', 22000.00), \
+                      (4, \'BMW\', \'3-Series\', \'2019\', \'BMW\', 35000.00), \
+                      (5, \'Chevrolet\', \'Silverado\', \'2016\', \'Chevrolet\', 28000.00), \
+                      (6, \'Hyundai\', \'Elantra\', \'2019\', \'Hyundai\', 20000.00), \
+                      (7, \'Volkswagen\', \'Jetta\', \'2018\', \'Volkswagen\', 23000.00), \
+                      (8, \'Mazda\', \'MX-5 Miata\', \'2016\', \'Mazda\', 21000.00), \
+                      (9, \'Subaru\', \'Outback\', \'2017\', \'Subaru\', 24000.00), \
+                      (10, \'Kia\', \'Sorento\', \'2018\', \'Kia\', 26000.00);');
+      database.exec('CREATE TABLE states ( name VARCHAR(255), capital VARCHAR(255), lat DECIMAL(9,6), long DECIMAL(10,7));');
+      database.exec('INSERT INTO states (name, capital, lat, long) VALUES \
+      (\'Andhra Pradesh\', \'Hyderabad\', 13.4125, 79.3861), \
+      (\'Arunachal Pradesh\', \'Itanagar\', 27.3451, 93.3851), \
+      (\'Assam\', \'Dispur\', 26.1567, 91.7397), \
+      (\'Bihar\', \'Patna\', 25.3479, 85.1919);');
+      logOutputText('Created sample tables.');
       fetchTableNames();
     }
   }, [database]);
