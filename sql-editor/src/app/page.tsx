@@ -7,13 +7,7 @@ import Footer from './components/footer';
 import Script from 'next/script';
 import { useDB } from './lib/hooks';
 import ViewTable from './components/viewtable';
-
-type TableType = [
-  {
-    columns: string[];
-    values: [string[]];
-  }
-];
+import { TableType } from './lib/types';
 
 export default function Home() {
   const [darkMode, setDarkMode] = useState('');
@@ -50,14 +44,18 @@ export default function Home() {
     if (database) {
       database.exec('DROP TABLE IF EXISTS hello;');
       database.exec('DROP TABLE IF EXISTS hello2;');
-      database.exec('CREATE TABLE hello21 (i int);')
-      database.exec("CREATE TABLE hello (a int, b char); \
-      INSERT INTO hello VALUES (0, 'hello'); \
-      INSERT INTO hello VALUES (1, 'world');");
+      database.exec('CREATE TABLE hello21 (i int, j int);')
+      database.exec("CREATE TABLE hello (a int, b char, name varchar(32)); \
+      INSERT INTO hello VALUES (0, 'hello', 'syed'); \
+      INSERT INTO hello VALUES (1, 'world', 'furquan');");
       logOutputText('Created dummy tables.');
       fetchTableNames();
     }
-  }, [database])
+
+    if (database && viewingTable === null) {
+      setViewingTable(fetchTable('hello'));
+    }
+  }, [database]);
 
   useEffect(() => {
     if (darkMode === '') {
@@ -83,7 +81,7 @@ export default function Home() {
           <SQLField onChange={(e) => editorText.current = e.target.value} loaded={database !== null} />
           <SQLOutputField messages={database === null ? undefined : messages} />
         </article>
-        <ViewTable tables={tables} clickSync={() => fetchTableNames()} />
+        <ViewTable tables={tables} clickSync={() => fetchTableNames()} viewTable={viewingTable} />
         <Footer />
       </main>
     </>
