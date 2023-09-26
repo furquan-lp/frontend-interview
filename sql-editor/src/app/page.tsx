@@ -8,9 +8,17 @@ import Script from 'next/script';
 import { useDB } from './lib/hooks';
 import ViewTable from './components/viewtable';
 
+type TableNames = [
+  {
+    columns: string[];
+    values: [string[]];
+  }
+];
+
 export default function Home() {
   const [darkMode, setDarkMode] = useState('');
   const [messages, setMessages] = useState<string[]>(['Loaded SQLite from sql.js v1.8.0.']);
+  const [tables, setTables] = useState<string[]>([]);
   let editorText = useRef('');
   const database: any = useDB();
 
@@ -49,7 +57,7 @@ export default function Home() {
       <Script type="module" strategy='beforeInteractive' src="/sql-loader.js" />
       <main className='flex flex-col dark:bg-slate-700 min-h-screen'>
         <Header version={0.6} clickRun={() => {
-          console.log('running')
+          console.log('running', editorText.current)
           runQuery(editorText.current);
         }} setDarkMode={setDarkMode}
           theme={darkMode} />
@@ -57,7 +65,7 @@ export default function Home() {
           <SQLField onChange={(e) => editorText.current = e.target.value} loaded={database !== null} />
           <SQLOutputField messages={database === null ? undefined : messages} />
         </article>
-        <ViewTable tables={[]} />
+        <ViewTable tables={tables} />
         <Footer />
       </main>
     </>
