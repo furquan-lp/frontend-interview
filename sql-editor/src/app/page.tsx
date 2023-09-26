@@ -9,9 +9,11 @@ import { useDB } from './lib/hooks';
 import ViewTable from './components/viewtable';
 import { TableType } from './lib/types';
 
+const globalVersion = 0.8;
+
 export default function Home() {
   const [darkMode, setDarkMode] = useState('');
-  const [messages, setMessages] = useState<string[]>(['SQL Editor version 0.8',
+  const [messages, setMessages] = useState<string[]>([`SQL Editor version ${globalVersion}`,
     'Found WASM blob. Loaded SQLite from sql.js v1.8.0.']);
   const [tables, setTables] = useState<string[]>([]);
   const [currentTable, setCurrentTable] = useState<string>('none');
@@ -22,7 +24,6 @@ export default function Home() {
   const runQuery = (query: string) => {
     try {
       let result: [] = database.exec(query);
-      console.log('result is', result);
       logOutputText(result.length === 0 ? `Query "${query.substring(0, 20)}..." ran successfully.`
         : '' + JSON.stringify(result));
     } catch (e: any) {
@@ -70,7 +71,6 @@ export default function Home() {
 
   useEffect(() => {
     if (database && tables.includes(currentTable)) {
-      console.log('fetching')
       setViewingTable(fetchTable(currentTable));
     } else if (currentTable === 'none') {
       setViewingTable(null);
@@ -81,11 +81,12 @@ export default function Home() {
     <>
       <Script type="module" strategy='beforeInteractive' src="/sql-loader.js" />
       <main className='flex flex-col gap-y-2 dark:bg-slate-700 min-h-screen'>
-        <Header version={0.8} clickRun={() => runQuery(editorText.current)} clickClear={() => {
+        <Header version={globalVersion} clickRun={() => runQuery(editorText.current)} clickClear={() => {
           let e = document.getElementById('sqltextarea') as HTMLTextAreaElement;
           if (e) {
             e.value = '';
             editorText.current = '';
+            setMessages([`SQL Editor version ${globalVersion}`]);
           }
         }} setDarkMode={setDarkMode}
           theme={darkMode} />
