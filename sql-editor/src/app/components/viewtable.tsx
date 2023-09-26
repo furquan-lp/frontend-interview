@@ -24,7 +24,8 @@ export default function ViewTable({ tables, setTable, clickSync, viewTable }: {
           <thead>
             <tr>
               {viewTable[0].columns.map((c, i) =>
-                <th className="border border-slate-400 dark:border-slate-500" key={c + i}>{c}</th>)}
+                <th className="border border-slate-400 bg-slate-200 dark:border-slate-500  dark:bg-slate-600"
+                  key={c + i}>{c}</th>)}
             </tr>
           </thead>
           <tbody>
