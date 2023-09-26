@@ -18,19 +18,22 @@ export default function ViewTable({ tables, setTable, clickSync, viewTable }: {
         <button className='material-symbols-outlined text-slate-600 hover:bg-slate-100 dark:text-slate-100
        dark:hover:bg-slate-600 p-1 rounded-full' onClick={clickSync}>Sync</button>
       </section>
-      {viewTable !== null && viewTable.length ? <table className="text-center mx-1 md:mx-2 shadow">
-        <thead>
-          <tr>
-            {viewTable[0].columns.map(c =>
-              <th className="border border-slate-400 dark:border-slate-500" key={c}>{c}</th>)}
-          </tr>
-        </thead>
-        <tbody>
-          {viewTable[0].values.map((r, i) => <tr key={i + r.toString()}>{r.map(v =>
-            <td className="border border-slate-400 dark:border-slate-500" key={v}>{v}</td>)}</tr>)}
-        </tbody>
-      </table>
-        : <section className='flex mx-2 border rounded-md grow items-center justify-center'>No table selected</section>
+      {viewTable !== null && viewTable.length ?
+        <table className="text-center mx-1 md:mx-2 shadow">
+          <thead>
+            <tr>
+              {viewTable[0].columns.map(c =>
+                <th className="border border-slate-400 dark:border-slate-500" key={c}>{c}</th>)}
+            </tr>
+          </thead>
+          <tbody>
+            {viewTable[0].values.map((r, i) => <tr key={i + r.toString()}>{r.map(v =>
+              <td className="border border-slate-400 dark:border-slate-500" key={v}>{v}</td>)}</tr>)}
+          </tbody>
+        </table> :
+        <section className='flex mx-2 border dark:border-slate-500 rounded-md grow items-center justify-center'>
+          No table selected
+        </section>
       }
     </article>
   );
