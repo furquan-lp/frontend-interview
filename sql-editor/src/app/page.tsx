@@ -11,9 +11,10 @@ import { TableType } from './lib/types';
 
 export default function Home() {
   const [darkMode, setDarkMode] = useState('');
-  const [messages, setMessages] = useState<string[]>(['SQL Editor version 0.7',
+  const [messages, setMessages] = useState<string[]>(['SQL Editor version 0.8',
     'Found WASM blob. Loaded SQLite from sql.js v1.8.0.']);
   const [tables, setTables] = useState<string[]>([]);
+  const [currentTable, setCurrentTable] = useState<string>('none');
   const [viewingTable, setViewingTable] = useState<TableType | null>(null);
   let editorText = useRef('');
   const database: any = useDB();
@@ -51,10 +52,6 @@ export default function Home() {
       logOutputText('Created dummy tables.');
       fetchTableNames();
     }
-
-    if (database && viewingTable === null) {
-      setViewingTable(fetchTable('hello'));
-    }
   }, [database]);
 
   useEffect(() => {
@@ -71,17 +68,26 @@ export default function Home() {
     }
   }, [darkMode]);
 
+  useEffect(() => {
+    if (database && tables.includes(currentTable)) {
+      console.log('fetching')
+      setViewingTable(fetchTable(currentTable));
+    } else if (currentTable === 'none') {
+      setViewingTable(null);
+    }
+  }, [currentTable]);
+
   return (
     <>
       <Script type="module" strategy='beforeInteractive' src="/sql-loader.js" />
       <main className='flex flex-col dark:bg-slate-700 min-h-screen'>
-        <Header version={0.7} clickRun={() => runQuery(editorText.current)} setDarkMode={setDarkMode}
+        <Header version={0.8} clickRun={() => runQuery(editorText.current)} setDarkMode={setDarkMode}
           theme={darkMode} />
         <article className='flex flex-wrap md:flex-nowrap gap-y-2 mx-1 my-2 md:gap-x-2 md:m-2'>
           <SQLField onChange={(e) => editorText.current = e.target.value} loaded={database !== null} />
           <SQLOutputField messages={database === null ? undefined : messages} />
         </article>
-        <ViewTable tables={tables} clickSync={() => fetchTableNames()} viewTable={viewingTable} />
+        <ViewTable tables={tables} setTable={setCurrentTable} clickSync={() => fetchTableNames()} viewTable={viewingTable} />
         <Footer />
       </main>
     </>
