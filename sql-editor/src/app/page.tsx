@@ -38,6 +38,23 @@ export default function Home() {
     setMessages([...messages, message]);
   };
 
+  const fetchTableNames = () => {
+    const tableResults: TableNames = database.exec("SELECT name FROM sqlite_master WHERE type='table';");
+    setTables(tableResults[0].values.map(v => v[0]));
+  }
+
+  useEffect(() => {
+    if (database) {
+      database.exec('DROP TABLE IF EXISTS hello;');
+      database.exec('DROP TABLE IF EXISTS hello2;');
+      database.exec('CREATE TABLE hello22 (i int);')
+      database.exec("CREATE TABLE hello (a int, b char); \
+      INSERT INTO hello VALUES (0, 'hello'); \
+      INSERT INTO hello VALUES (1, 'world');");
+      fetchTableNames();
+    }
+  }, [database])
+
   useEffect(() => {
     if (darkMode === '') {
       localStorage.removeItem('theme');
