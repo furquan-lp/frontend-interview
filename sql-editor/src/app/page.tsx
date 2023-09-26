@@ -17,8 +17,10 @@ type TableType = [
 
 export default function Home() {
   const [darkMode, setDarkMode] = useState('');
-  const [messages, setMessages] = useState<string[]>(['Loaded SQLite from sql.js v1.8.0.']);
+  const [messages, setMessages] = useState<string[]>(['SQL Editor version 0.7',
+    'Found WASM blob. Loaded SQLite from sql.js v1.8.0.']);
   const [tables, setTables] = useState<string[]>([]);
+  const [viewingTable, setViewingTable] = useState<TableType | null>(null);
   let editorText = useRef('');
   const database: any = useDB();
 
@@ -42,6 +44,8 @@ export default function Home() {
     setTables(tableResults[0].values.map(v => v[0]));
   }
 
+  const fetchTable = (table: string): TableType => database.exec(`SELECT * FROM ${table};`);
+
   useEffect(() => {
     if (database) {
       database.exec('DROP TABLE IF EXISTS hello;');
@@ -50,6 +54,7 @@ export default function Home() {
       database.exec("CREATE TABLE hello (a int, b char); \
       INSERT INTO hello VALUES (0, 'hello'); \
       INSERT INTO hello VALUES (1, 'world');");
+      logOutputText('Created dummy tables.');
       fetchTableNames();
     }
   }, [database])
