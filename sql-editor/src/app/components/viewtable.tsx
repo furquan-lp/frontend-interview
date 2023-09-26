@@ -4,6 +4,7 @@ export default function ViewTable({ tables }: { tables: string[] }) {
       <span>Spectating Table:</span>
       <select className='p-1 px-2 rounded-md bg-slate-200 dark:bg-slate-600'>
         <option value='none'>Select Table</option>
+        {tables.length && tables.map(t => <option value={`${t}`}>{t}</option>)}
       </select>
       <button className='material-symbols-outlined text-slate-600 hover:bg-slate-100 dark:text-slate-100
        dark:hover:bg-slate-600 p-1 rounded-full'>Sync</button>
