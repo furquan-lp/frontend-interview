@@ -12,8 +12,7 @@ function AssignmentCard({ title, blurb, image, tags, livelink, repolink, childre
   tags?: string[], livelink?: string, repolink: string, children?: JSX.Element
 }) {
   return (
-    <article className='flex flex-col gap-y-2 border rounded border-white p-2 text-white my-4 md:my-10 w-full
-     bg-white/5'>
+    <article className='flex flex-col gap-y-2 border rounded border-white p-2 text-white w-full bg-white/5'>
       <section className='flex flex-col border-b'>
         <span className='text-3xl font-bold'>{title}</span>
         {tags && <div className='flex my-2'>{tags.map(t => <AssignmentCardTag tag={t} />)}</div>}
@@ -40,7 +39,7 @@ function App() {
   return (
     <main>
       <Header />
-      <section className='flex flex-col md:mt-10 w-2/3 mx-auto'>
+      <section className='flex flex-col gap-y-4 md:gap-y-10 md:mt-10 w-2/3 mx-auto'>
         <span className='text-white text-2xl italic'>Assorted frontend projects, interview questions
           and assignments. </span>
         <AssignmentCard title='SQL Editor' blurb='A backendless responsive SQL Editor web app built with Next.js and
