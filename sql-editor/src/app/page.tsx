@@ -47,7 +47,7 @@ export default function Home() {
     if (database) {
       database.exec('DROP TABLE IF EXISTS hello;');
       database.exec('DROP TABLE IF EXISTS hello2;');
-      database.exec('CREATE TABLE hello22 (i int);')
+      database.exec('CREATE TABLE hello21 (i int);')
       database.exec("CREATE TABLE hello (a int, b char); \
       INSERT INTO hello VALUES (0, 'hello'); \
       INSERT INTO hello VALUES (1, 'world');");
@@ -73,7 +73,7 @@ export default function Home() {
     <>
       <Script type="module" strategy='beforeInteractive' src="/sql-loader.js" />
       <main className='flex flex-col dark:bg-slate-700 min-h-screen'>
-        <Header version={0.6} clickRun={() => {
+        <Header version={0.7} clickRun={() => {
           console.log('running', editorText.current)
           runQuery(editorText.current);
         }} setDarkMode={setDarkMode}
@@ -82,7 +82,7 @@ export default function Home() {
           <SQLField onChange={(e) => editorText.current = e.target.value} loaded={database !== null} />
           <SQLOutputField messages={database === null ? undefined : messages} />
         </article>
-        <ViewTable tables={tables} />
+        <ViewTable tables={tables} clickSync={() => fetchTableNames()} />
         <Footer />
       </main>
     </>
