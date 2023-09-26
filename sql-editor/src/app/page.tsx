@@ -38,7 +38,7 @@ export default function Home() {
   const fetchTableNames = () => {
     const tableResults: TableType = database.exec('SELECT name FROM sqlite_master WHERE type=\'table\';');
     setTables(tableResults[0].values.map(v => v[0]));
-  }
+  };
 
   const fetchTable = (table: string): TableType => database.exec(`SELECT * FROM ${table};`);
 
@@ -46,7 +46,7 @@ export default function Home() {
     if (database) {
       database.exec('DROP TABLE IF EXISTS hello;');
       database.exec('DROP TABLE IF EXISTS hello2;');
-      database.exec('CREATE TABLE hello21 (i int, j int);')
+      database.exec('CREATE TABLE hello21 (i int, j int);');
       database.exec("CREATE TABLE hello (a int, b char, name varchar(32)); \
       INSERT INTO hello VALUES (0, 'hello', 'syed'); \
       INSERT INTO hello VALUES (1, 'world', 'furquan');");
