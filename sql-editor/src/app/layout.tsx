@@ -1,6 +1,7 @@
 import './globals.css';
 import type { Metadata } from 'next';
 import { Patua_One, Source_Code_Pro } from 'next/font/google';
+import Script from 'next/script';
 
 const sourceCodePro = Source_Code_Pro({
   subsets: ['latin'],
@@ -28,6 +29,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${patua.variable} ${sourceCodePro.variable}`}>
       <head>
+        <Script type="module" strategy='beforeInteractive' src="/sql-loader.js" />
         <link href="https://fonts.googleapis.com/icon?family=Material+Symbols+Outlined"
           rel="stylesheet" />
       </head>
