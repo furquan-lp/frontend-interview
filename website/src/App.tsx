@@ -7,9 +7,9 @@ function AssignmentCardTag({ tag }: { tag: string }) {
   );
 }
 
-function AssignmentCard({ title, blurb, image, tags, children }: {
+function AssignmentCard({ title, blurb, image, tags, livelink, repolink, children }: {
   title: string, blurb: string, image: string,
-  tags?: string[], children?: JSX.Element
+  tags?: string[], livelink?: string, repolink: string, children?: JSX.Element
 }) {
   return (
     <article className='flex flex-col gap-y-2 border rounded border-white p-2 text-white my-4 md:my-10 w-full bg-white/5'>
@@ -24,7 +24,13 @@ function AssignmentCard({ title, blurb, image, tags, children }: {
         </div>
         <img src={image} className='w-2/3 rounded-md' />
       </section>
-      <span></span>
+      <footer className='flex justify-between border-t py-2 mt-1'>
+        {livelink ?
+          <a className='hover:bg-white/10 text-white p-1 md:text-lg hover:underline border-amber-100 border'
+            href={livelink}>Visit Live</a> : null}
+        <a className='hover:bg-white/10 text-white p-1 md:text-lg hover:underline border-blue-100 border'
+          href={repolink}>View Source</a>
+      </footer>
     </article>
   );
 }
@@ -37,7 +43,9 @@ function App() {
         <span className='text-white text-2xl italic'>Assorted frontend projects, interview questions
           and assignments. </span>
         <AssignmentCard title='React Circles' blurb='This is a frontend React interview assignment (junior level).
-         Written in TypeScript and React, built with Vite.' image='/react-circles-screenshot.webp' tags={['React', 'TypeScript']}>
+         Written in TypeScript and React, built with Vite.' image='/react-circles-screenshot.webp'
+          tags={['React', 'TypeScript']} livelink='https://circles.frontend.nextdev.in/'
+          repolink='https://github.com/furquan-lp/frontend-interview/tree/master/react-circles'>
           <span>???</span>
         </AssignmentCard>
       </section>
