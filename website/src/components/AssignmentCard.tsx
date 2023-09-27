@@ -10,12 +10,12 @@ export default function AssignmentCard({ title, blurb, image, tags, livelink, re
   tags?: string[], livelink?: string, repolink: string, children?: JSX.Element
 }) {
   return (
-    <article className='flex flex-col gap-y-2 border rounded border-white p-2 text-white w-full bg-white/5'>
+    <article className='flex flex-col gap-y-2 border rounded border-white p-1 md:p-2 text-white w-full bg-white/5'>
       <header className='flex flex-col border-b'>
         <span className='text-3xl font-bold'>{title}</span>
         {tags && <div className='flex my-2'>{tags.map(t => <AssignmentCardTag tag={t} />)}</div>}
       </header>
-      <section className='flex gap-x-2 justify-between'>
+      <section className='flex flex-col gap-y-2 md:flex-row md:gap-x-2 justify-between'>
         <div className='flex flex-col justify-around md:w-2/3'>
           <span className='text-xl'>{blurb}</span>
           {children}
