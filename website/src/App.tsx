@@ -40,8 +40,8 @@ function App() {
   return (
     <main>
       <Header />
-      <section className='flex flex-col gap-y-4 md:gap-y-10 md:mt-10 w-2/3 mx-auto'>
-        <span className='text-white text-2xl italic'>Assorted frontend projects, interview questions
+      <section className='flex flex-col gap-y-4 md:gap-y-10 mt-2 md:mt-10 md:w-2/3 mx-1 md:mx-auto'>
+        <span className='text-white text-xl md:text-2xl italic'>Assorted frontend projects, interview questions
           and assignments. </span>
         <AssignmentCard title='SQL Editor' blurb='A backendless responsive SQL Editor web app built with Next.js and
          TypeScript. Runs SQLite in the browser using WebAssembly and requires nothing on the backend.'
