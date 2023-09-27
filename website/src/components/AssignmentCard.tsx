@@ -13,7 +13,8 @@ export default function AssignmentCard({ title, blurb, image, tags, livelink, re
     <article className='flex flex-col gap-y-2 border rounded border-white p-1 md:p-2 text-white w-full bg-white/5'>
       <header className='flex flex-col border-b'>
         <span className='text-2xl md:text-3xl font-bold'>{title}</span>
-        {tags && <div className='flex flex-wrap my-2'>{tags.map(t => <AssignmentCardTag tag={t} />)}</div>}
+        {tags && <div className='flex flex-wrap my-2'>{tags.map((t, i) =>
+          <AssignmentCardTag tag={t} key={t + i} />)}</div>}
       </header>
       <section className='flex flex-col gap-y-3 md:flex-row md:gap-x-2 md:gap-y-0 justify-between'>
         <div className='flex flex-col justify-around gap-y-1 md:gap-y-0 md:w-2/3'>
