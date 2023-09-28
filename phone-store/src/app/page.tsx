@@ -4,6 +4,7 @@ import { ProductCard, ProductInfoDialog } from './components/product';
 import Header from './components/header';
 import Loading from './components/loading';
 import Script from 'next/script';
+import Footer from './components/footer';
 
 interface PhoneObject {
   id?: string,
@@ -122,6 +123,7 @@ export default function Home() {
               setProductDialog(true);
             }} />) : null}
         </section>
+        <Footer />
       </main>
     </>
   );
