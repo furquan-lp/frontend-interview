@@ -63,11 +63,11 @@ prices.sort()
 ids = generate_phone_ids(phones, prices)
 
 con = psycopg2.connect(
-        host=os.environ['POSTGRE_DB_HOST'],
-        port=25060,
-        database="defaultdb",
-        user=os.environ['POSTGRE_DB_USERNAME'],
-        password=os.environ['POSTGRE_DB_PASSWORD'])
+        host=os.environ['POSTGRES_DB_HOST'],
+        port=os.environ['POSTGRES_DB_PORT'],
+        database=os.environ['POSTGRES_DB_NAME'],
+        user=os.environ['POSTGRES_DB_USERNAME'],
+        password=os.environ['POSTGRES_DB_PASSWORD'])
 
 cur = con.cursor()
 
