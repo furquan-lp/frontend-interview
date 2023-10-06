@@ -34,6 +34,19 @@ def generate_phone_name():
 
     return (f'{word} {first_letter}{second_letter}{number} {extra}'.strip(), brand_name)
 
+def generate_phone_desc(brand, phone_model, price, ai):
+    prompt = """
+    Generate a brief description spanning about 5 lines for a (fictional) mobile phone named '%s' by
+    %s which costs about %d INR. Do not use bullet points. Do not include the cost in the description.
+    """
+    completion = palm.generate_text(
+        model=ai,
+        prompt=prompt % (phone_model, brand, price),
+        temperature=0,
+        max_output_tokens=800,
+    )
+    return completion.result
+
 def generate_phone_ids(phones, prices):
     ids = []
     for i in range(len(phones)):
