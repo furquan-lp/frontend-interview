@@ -2,11 +2,17 @@ import os
 import random
 import string
 import psycopg2
+import google.generativeai as palm
 
 brands = [ 'Samsung', 'Apple', 'Google', 'OnePlus', 'Asus', 'Nokia', 'Xiaomi', 'Vivo', 'Oppo' ]
 words = [ 'Call', 'Sky', 'Jet', 'Lumen', 'Bold', 'Glass', 'Gold' ]
 superlatives = [ 'Pro', 'Plus', 'Pro+', 'Super', 'Ultra' ]
 images_dir = 'phones/'
+
+palm.configure(api_key=os.environ['WRITEDB_PALM_API_KEY'])
+aimodels = [m for m in palm.list_models() if 'generateText' in m.supported_generation_methods]
+ai = aimodels[0].name
+print(f'Using LLM {ai}.')
 
 def generate_phone_name():
     brand_name = random.choice(brands)
