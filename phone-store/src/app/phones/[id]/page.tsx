@@ -1,6 +1,7 @@
 import Script from 'next/script';
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
+import { Metadata } from 'next';
 import Footer from '@/app/components/footer';
 import Header from './components/header';
 
@@ -13,7 +14,25 @@ type Phone = [{
   image?: string;
 }];
 
-export default async function PhonePage({ params }: { params: { id: string } }) {
+type Props = {
+  params: { id: string }
+}
+
+export async function generateMetadata({ params }: Props) {
+  let data = await fetch(`${process.env.HOST_URL}/api/db/${params.id}`);
+  if (data.ok) {
+    let phone: Phone | null = await data.json();
+    return {
+      title: `Phone Store App | ${phone![0].brand} ${phone![0].model}`
+    };
+  } else {
+    return {
+      title: `Not Found | Phone Store App`
+    };
+  }
+}
+
+export default async function PhonePage({ params }: Props) {
   let data = await fetch(`${process.env.HOST_URL}/api/db/${params.id}`);
   if (data.ok) {
     let phone: Phone | null = await data.json();
