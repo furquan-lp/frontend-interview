@@ -29,7 +29,7 @@ export default async function PhonePage({ params }: { params: { id: string } }) 
             <Image src={`/phones/${phone![0].image || 'sample-phone.webp'}`} width={320} height={480}
               alt={`product ${phone![0].brand + ' ' + phone![0].model} photo`}
               className='m-2 mx-10' />
-            <section className='flex flex-col mt-10 justify-around'>
+            <section className='flex flex-col my-2 justify-between'>
               <span className='flex flex-col'>
                 <span className='md:text-4xl m-1'>{phone![0].model}</span>
                 <span className='flex items-center m-1 my-4 text-xl'>Rating: {[...Array(5)].map((e, i) =>
