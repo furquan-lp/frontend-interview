@@ -8,11 +8,10 @@ type ProductPhone = {
   price: number;
 };
 
-export function ProductCard({ imageUrl, name, brand, price, onClick }: ProductPhone & { onClick: MouseEventHandler }) {
+export function ProductCard({ imageUrl, name, brand, price }: ProductPhone) {
   return (
     <article className='flex flex-col items-center p-2 border border-slate-300 rounded-md shadow-md cursor-pointer
-     hover:border-slate-500 hover:bg-slate-100'
-      onClick={onClick}>
+     hover:border-slate-500 hover:bg-slate-100'>
       <Image src={`/${imageUrl || '/sample-phone.webp'}`} width={220} height={380} alt='product phone photo' />
       <span className='text-xl'>{name}</span>
       <span className='text-slate-500'>{brand || 'Unknown'}</span>
