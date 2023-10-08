@@ -20,7 +20,7 @@ export default async function PhonePage({ params }: { params: { id: string } }) 
     return (
       <>
         <Script src='https://unpkg.com/feather-icons' strategy='beforeInteractive' />
-        <Script strategy='lazyOnload'>
+        <Script strategy='afterInteractive' id='feather-script-oneline'>
           feather.replace()
         </Script>
         <main className='min-h-screen'>
