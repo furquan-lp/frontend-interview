@@ -121,6 +121,7 @@ cur.execute('CREATE TABLE phone_models ('
     'brand varchar(32),'
     'model text NOT NULL,'
     'price int NOT NULL,'
+    'desc text,'
     'image varchar(50));')
 cur.execute('CREATE TABLE phone_metadata ('
     'brands varchar[] NOT NULL,'
@@ -128,12 +129,12 @@ cur.execute('CREATE TABLE phone_metadata ('
     'superlatives varchar[] NOT NULL,'
     'image_files varchar[]);')
 
-for phone, price, id in zip(phones, prices, ids):
+for phone, price, id, description in zip(phones, prices, ids, descriptions):
     image = random.choice(os.listdir(f'public/{images_dir}'))
     print(f'Running {phone[1]} {phone[0]}; ₹{price} - {image}; id: {id}')
-    cur.execute('INSERT INTO phone_models (id, brand, model, price, image)'
-                'VALUES (%s, %s, %s, %s, %s)',
-                (id, phone[1], phone[0], price, image))
+    cur.execute('INSERT INTO phone_models (id, brand, model, price, image, desc)'
+                'VALUES (%s, %s, %s, %s, %s, %s)',
+                (id, phone[1], phone[0], price, image, description))
 
 brands_string = '{{"{0}"}}'.format('", "'.join(brands))
 words_string = '{{"{0}"}}'.format('", "'.join(words))
