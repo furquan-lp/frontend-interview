@@ -1,6 +1,7 @@
 import Footer from '@/app/components/footer';
 import Header from './components/header';
 import Script from 'next/script';
+import { notFound } from 'next/navigation';
 
 type Phone = [{
   id: string;
@@ -15,7 +16,6 @@ export default async function PhonePage({ params }: { params: { id: string } }) 
   let data = await fetch(`${process.env.HOST_URL}/api/db/${params.id}`);
   if (data.ok) {
     let phone: Phone | null = await data.json();
-    console.log(phone![0]);
     return (
       <>
         <Script src='https://unpkg.com/feather-icons' strategy='beforeInteractive' />
@@ -29,5 +29,7 @@ export default async function PhonePage({ params }: { params: { id: string } }) 
         </main>
       </>
     );
+  } else {
+    notFound();
   }
 }
