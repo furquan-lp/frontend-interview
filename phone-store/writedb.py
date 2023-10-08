@@ -104,7 +104,7 @@ cur = con.cursor()
 
 if os.getenv('WRITEDB_LOGGING') == 'true':
     print('Previous data:')
-    cur.execute("CREATE OR REPLACE FUNCTION select_phone_models() RETURNS TABLE(id varchar(50), brand varchar(32), model text, price int, image varchar(50)) AS $$ "
+    cur.execute("CREATE OR REPLACE FUNCTION select_phone_models() RETURNS TABLE(id varchar(50), brand varchar(32), model text, price int, image varchar(50), description text) AS $$ "
     "BEGIN "
         "IF EXISTS (SELECT FROM information_schema.tables WHERE table_schema = 'public' AND table_name = 'phone_models') THEN"
         "    RETURN QUERY SELECT * FROM \"phone_models\";"
