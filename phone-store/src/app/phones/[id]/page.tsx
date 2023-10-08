@@ -22,9 +22,11 @@ export default async function PhonePage({ params }: { params: { id: string } }) 
         <Script strategy='lazyOnload'>
           feather.replace()
         </Script>
-        <main>
+        <main className='min-h-screen'>
           <Header />
-          <h1>Name: <b>{phone![0].brand} {phone![0].model}</b></h1>
+          <article className='mx-auto w-40 border rounded-md shadow p-2 flex'>
+            Name: {phone![0].brand + ' ' + phone![0].model}
+          </article>
           <Footer />
         </main>
       </>
