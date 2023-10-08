@@ -113,7 +113,8 @@ export default function Home() {
           searchValue={searchBarValue} setSearch={setSearchFilter} fetched={phoneMap.size > 0} />
         <Loading fetched={phoneMap.size > 0} results={phones[0].length} />
         <section className='flex items-start gap-2 flex-wrap mx-2'>
-          {phones[0].length ? phones[0].map((p: PhoneObject) => <a href={`/phones/${p.id}`}>
+          {phones[0].length ? phones[0].map((p: PhoneObject) => <a href={`/phones/${p.id}`} target='_blank'
+            rel='noopener noreferrer'>
             <ProductCard name={p.model} brand={p.brand} price={p.price} imageUrl={`phones/${p.image}`} key={p.id} />
           </a>) : null}
         </section>
