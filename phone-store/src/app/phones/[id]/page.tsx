@@ -25,10 +25,36 @@ export default async function PhonePage({ params }: { params: { id: string } }) 
         </Script>
         <main className='min-h-screen'>
           <Header />
-          <article className='flex justify-around md:mx-40 xl:mx-96 my-20 border rounded-md shadow p-2'>
+          <article className='flex justify-around md:mx-40 xl:mx-60 2xl:mx-80 my-20 border rounded-md shadow p-2 py-4'>
             <Image src={`/phones/${phone![0].image || 'sample-phone.webp'}`} width={320} height={480}
               alt={`product ${phone![0].brand + ' ' + phone![0].model} photo`}
               className='m-2 mx-10' />
+            <section className='flex flex-col mt-10 justify-around'>
+              <span className='flex flex-col'>
+                <span className='md:text-4xl m-1'>{phone![0].model}</span>
+                <span className='flex items-center m-1 my-4 text-xl'>Rating: {[...Array(5)].map((e, i) =>
+                  <span className='ml-1 text-yellow-500 fill-yellow-400'
+                    key={e + phone![0].model + phone![0].price + i}>&#9734;</span>)}
+                </span>
+                <span className='m-1 my-2 text-xl'>
+                  By <span className='text-slate-600'>{phone![0].brand || 'Unknown'}</span>
+                </span>
+                <span className='m-1 my-2 text-xl'>
+                  {phone![0].description}
+                </span>
+              </span>
+              <span className='flex flex-col gap-y-2'>
+                <span className='m-1 text-3xl'>&#8377;{phone![0].price}</span>
+                <span className='flex gap-2'>
+                  <button className='hover:bg-emerald-300 p-2 px-6 text-xl border border-emerald-500 rounded-md'>
+                    Buy
+                  </button>
+                  <button className='hover:bg-red-300 p-2 px-6 text-xl border border-red-500 rounded-md'>
+                    Close
+                  </button>
+                </span>
+              </span>
+            </section>
           </article>
           <Footer />
         </main>
