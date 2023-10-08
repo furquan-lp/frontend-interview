@@ -1,7 +1,8 @@
-import Footer from '@/app/components/footer';
-import Header from './components/header';
 import Script from 'next/script';
 import { notFound } from 'next/navigation';
+import Image from 'next/image';
+import Footer from '@/app/components/footer';
+import Header from './components/header';
 
 type Phone = [{
   id: string;
@@ -24,8 +25,10 @@ export default async function PhonePage({ params }: { params: { id: string } }) 
         </Script>
         <main className='min-h-screen'>
           <Header />
-          <article className='mx-auto w-40 border rounded-md shadow p-2 flex'>
-            Name: {phone![0].brand + ' ' + phone![0].model}
+          <article className='flex justify-around md:mx-40 xl:mx-96 my-20 border rounded-md shadow p-2'>
+            <Image src={`/phones/${phone![0].image || 'sample-phone.webp'}`} width={320} height={480}
+              alt={`product ${phone![0].brand + ' ' + phone![0].model} photo`}
+              className='m-2 mx-10' />
           </article>
           <Footer />
         </main>
