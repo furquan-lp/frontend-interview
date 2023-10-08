@@ -46,11 +46,11 @@ export default async function PhonePage({ params }: { params: { id: string } }) 
               <span className='flex flex-col gap-y-2'>
                 <span className='m-1 text-3xl'>&#8377;{phone![0].price}</span>
                 <span className='flex gap-2'>
-                  <button className='hover:bg-emerald-300 p-2 px-6 text-xl border border-emerald-500 rounded-md'>
+                  <button className='hover:bg-green-300 p-2 px-6 text-xl border border-emerald-500 rounded-md'>
                     Buy
                   </button>
-                  <button className='hover:bg-red-300 p-2 px-6 text-xl border border-red-500 rounded-md'>
-                    Close
+                  <button className='hover:bg-orange-300 p-2 px-6 text-xl border border-amber-500 rounded-md'>
+                    Add to cart
                   </button>
                 </span>
               </span>
