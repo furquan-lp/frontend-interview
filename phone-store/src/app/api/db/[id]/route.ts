@@ -7,10 +7,12 @@ export async function GET(request: Request, { params }: { params: { id: string }
     if (phoneQuery.rows.length === 0) {
       return new Response(`Unknown id: '${params.id}'`, { status: 404 });
     } else {
-      return new Response(JSON.stringify(phoneQuery.rows), { status: 200 });
+      return new Response(JSON.stringify(phoneQuery.rows), {
+        status: 200, headers: { 'Content-Type': 'application/json', }
+      });
     }
   } catch (error) {
     console.error(`DB Error encountered in dynamic API route: api/db/${params.id}`, error);
-    return new Response(`An error occurred: ${error}`, { status: 400 });
+    return new Response(`A database error occurred: ${error}`, { status: 400 });
   }
 }
