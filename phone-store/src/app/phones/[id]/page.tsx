@@ -1,7 +1,6 @@
 import Script from 'next/script';
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
-import { Metadata } from 'next';
 import Footer from '@/app/components/footer';
 import Header from './components/header';
 
@@ -27,7 +26,7 @@ export async function generateMetadata({ params }: Props) {
     };
   } else {
     return {
-      title: `Not Found | Phone Store App`
+      title: 'Not Found | Phone Store App'
     };
   }
 }
