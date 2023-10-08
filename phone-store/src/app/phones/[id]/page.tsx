@@ -25,7 +25,7 @@ export default async function PhonePage({ params }: { params: { id: string } }) 
         </Script>
         <main className='min-h-screen'>
           <Header />
-          <article className='flex justify-around md:mx-40 xl:mx-60 2xl:mx-80 my-20 border rounded-md shadow p-2 py-4'>
+          <article className='flex justify-around md:mx-40 xl:mx-60 2xl:mx-80 my-20 border rounded-md shadow-md p-2 py-4'>
             <Image src={`/phones/${phone![0].image || 'sample-phone.webp'}`} width={320} height={480}
               alt={`product ${phone![0].brand + ' ' + phone![0].model} photo`}
               className='m-2 mx-10' />
@@ -46,10 +46,12 @@ export default async function PhonePage({ params }: { params: { id: string } }) 
               <span className='flex flex-col gap-y-2'>
                 <span className='m-1 text-3xl'>&#8377;{phone![0].price}</span>
                 <span className='flex gap-2'>
-                  <button className='hover:bg-green-300 p-2 px-6 text-xl border border-emerald-500 rounded-md'>
+                  <button className='hover:bg-green-400 bg-green-500 text-white p-2 px-6 text-xl border
+                   border-emerald-500 rounded-md shadow transition-colors duration-200'>
                     Buy
                   </button>
-                  <button className='hover:bg-orange-300 p-2 px-6 text-xl border border-amber-500 rounded-md'>
+                  <button className='hover:bg-orange-300 bg-orange-400 text-white p-2 px-6 text-xl border
+                   border-amber-500 rounded-md shadow transition-colors duration-200'>
                     Add to cart
                   </button>
                 </span>
