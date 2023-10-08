@@ -20,3 +20,5 @@ dropping the tables
 * `POSTGRES_DB_NAME` - The database name to write the generated data to
 * `POSTGRES_DB_USERNAME` - The username for the PostgreSQL database
 * `POSTGRES_DB_PASSWORD` - The password for the PostgreSQL database
+
+![](./screenshot2.png)

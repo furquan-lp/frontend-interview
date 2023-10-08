@@ -7,7 +7,7 @@ import Script from 'next/script';
 import Footer from './components/footer';
 
 interface PhoneObject {
-  id?: string,
+  id: string,
   brand: string,
   model: string,
   price: number,
@@ -72,8 +72,6 @@ export default function Home() {
   const [phoneMetadata, setPhoneMetadata] = useState<{ brands: string[] }>({ brands: [] });
   const searchBarValue = useRef<string>('');
   const [searchFilter, setSearchFilter] = useState<string>('');
-  const [currentCard, setCurrentCard] = useState<PhoneObject>({ brand: '', model: '', price: 0, image: '' });
-  const [productDialog, setProductDialog] = useState<boolean>(false);
 
   useEffect(() => {
     (async function () {
@@ -114,14 +112,11 @@ export default function Home() {
         <Header setBrand={setBrandfilter} brands={phoneMetadata.brands} setPrice={setPriceFilter}
           searchValue={searchBarValue} setSearch={setSearchFilter} fetched={phoneMap.size > 0} />
         <Loading fetched={phoneMap.size > 0} results={phones[0].length} />
-        <ProductInfoDialog imageUrl={currentCard.image} name={currentCard.model} brand={currentCard.brand}
-          price={currentCard.price} open={productDialog} clickClose={() => setProductDialog(false)} />
         <section className='flex items-start gap-2 flex-wrap mx-2'>
-          {phones[0].length ? phones[0].map((p: PhoneObject) => <ProductCard name={p.model} brand={p.brand}
-            price={p.price} imageUrl={`phones/${p.image}`} key={p.id} onClick={() => {
-              setCurrentCard({ brand: p.brand, model: p.model, price: p.price, image: p.image });
-              setProductDialog(true);
-            }} />) : null}
+          {phones[0].length ? phones[0].map((p: PhoneObject) => <a href={`/phones/${p.id}`} target='_blank'
+            rel='noopener noreferrer' key={p.id} >
+            <ProductCard name={p.model} brand={p.brand} price={p.price} imageUrl={`phones/${p.image}`} />
+          </a>) : null}
         </section>
         <Footer />
       </main>
