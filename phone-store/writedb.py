@@ -3,6 +3,7 @@ import random
 import string
 import psycopg2
 import google.generativeai as palm
+import time
 
 brands = [ 'Samsung', 'Apple', 'Google', 'OnePlus', 'Asus', 'Nokia', 'Xiaomi', 'Vivo', 'Oppo' ]
 words = [ 'Call', 'Sky', 'Jet', 'Lumen', 'Bold', 'Glass', 'Gold' ]
@@ -76,10 +77,21 @@ def generate_prices(n):
             prices.append(random.randint(10, 20) * 1000 + random.choice([999, 998]))
     return prices
 
-phones = generate_phones(1000)
+def generate_phone_descriptions(phones, prices, ai):
+    descs = []
+    print('Prompting for descriptions...')
+    for i in range(len(phones)):
+        descs.append(generate_phone_desc(phones[i][1], phones[i][0], prices[i], ai))
+        if ((i+1) % 90 == 0):
+            print('Sleeping at %d\r' % i)
+            time.sleep(60)
+    return descs
+
+phones = generate_phones(100)
 prices = generate_prices(len(phones))
 prices.sort()
 ids = generate_phone_ids(phones, prices)
+descriptions = generate_phone_descriptions(phones, prices, ai)
 
 con = psycopg2.connect(
         host=os.environ['POSTGRES_DB_HOST'],
@@ -135,4 +147,5 @@ cur.execute('INSERT INTO phone_metadata (brands, words, superlatives, image_file
 con.commit()
 cur.close()
 con.close()
+
 print('done')
