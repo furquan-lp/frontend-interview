@@ -9,6 +9,19 @@ function App() {
       <section className='flex flex-col gap-y-6 md:gap-y-10 mt-4 md:mt-10 md:w-2/3 mx-1 md:mx-auto'>
         <span className='text-white text-xl md:text-2xl italic'>Assorted frontend projects, interview questions
           and assignments. </span>
+        <AssignmentCard title='&mu;Sorcerer' blurb='A responsive lightweight Rich Text editor written in React and
+          TypeScript. Runs locally as well as online (on the live deployment).' image='/react-sorcerer-screenshot.webp'
+          tags={['React', 'TypeScript', 'Draft.js']}
+          livelink='https://react.sorcerer.live/'
+          repolink='https://github.com/furquan-lp/react-sorcerer'>
+          <ul className='list-disc list-inside md:text-lg'>
+            <div className='font-bold md:text-xl mb-2'>Features:</div>
+            <li>Rich Text syntax with enhanced markdown (title, alignment, etc.).</li>
+            <li>Simple persistent storage, backendless and private.</li>
+            <li>Responsive (runs on mobile) and available to run locally without an internet connection.</li>
+          </ul>
+        </AssignmentCard>
+
         <AssignmentCard title='SQL Editor' blurb='A backendless responsive SQL Editor web app built with Next.js and
          TypeScript. Runs SQLite in the browser using WebAssembly and requires nothing on the backend.'
           image='/sql-editor-screenshot.webp' tags={['Next.js', 'TypeScript', 'SQLite', 'WASM']}
