@@ -78,7 +78,7 @@ function App() {
           </ul>
         </AssignmentCard>
       </section>
-      <Footer build='20230927' />
+      <Footer build='20240211' />
     </main>
   );
 }
